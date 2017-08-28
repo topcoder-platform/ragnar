@@ -1,0 +1,12 @@
+{
+  "extends": "eslint-config-topcoder/nodejs",
+  "env": {
+      "mocha": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module"
+  },
+  "rules": {
+  }
+}

@@ -1,0 +1,31 @@
+{
+    "name": "lagertha",
+    "version": "1.0.0",
+    "description": "lagertha app",
+    "author": "TCSCODER",
+    "license": "ISC",
+    "main": "app.js",
+    "engines": {
+        "node": "8"
+    },
+    "scripts": {
+        "start": "node app.js",
+        "test": "node ./node_modules/mocha/bin/mocha --recursive --timeout 999999 --colors tests/*.test.js --bail",
+        "lint": "eslint . --ext .js || true"
+    },
+    "dependencies": {
+        "cors": "^2.8.4",
+        "express": "^4.15.4",
+        "get-parameter-names": "^0.3.0",
+        "github-api": "^3.0.0",
+        "joi": "^10.6.0",
+        "lodash": "^4.17.4",
+        "winston": "^2.3.1"
+    },
+    "devDependencies": {
+        "chai": "^4.1.1",
+        "eslint-config-topcoder": "^2.0.0",
+        "mocha": "^3.5.0",
+        "supertest": "^3.0.0"
+    }
+}
