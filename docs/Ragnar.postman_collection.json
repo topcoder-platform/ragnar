@@ -1,0 +1,60 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Ragnar",
+		"_postman_id": "f9fa3896-1f9e-70bd-176c-d2d2bd629fad",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List user teams",
+			"request": {
+				"url": {
+					"raw": "{{URL}}/api/v1/github/user/teams?page=1&perPage=10",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"github",
+						"user",
+						"teams"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "perPage",
+							"value": "10",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Add user to team",
+			"request": {
+				"url": "{{URL}}/api/v1/github/teams/{{teamId}}/memberships/{{username}}",
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
