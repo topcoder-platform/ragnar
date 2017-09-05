@@ -16,4 +16,6 @@ module.exports = {
     username: process.env.GITHUB_ACCOUNT_USERNAME,
     password: process.env.GITHUB_ACCOUNT_PASSWORD,
   },
+  GITLAB_API_BASE_URL: process.env.GITLAB_API_BASE_URL || 'https://gitlab.com/api/v4',
+  GITLAB_API_PRIVATE_TOKEN: process.env.GITLAB_API_PRIVATE_TOKEN,
 };

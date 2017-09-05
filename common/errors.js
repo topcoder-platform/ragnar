@@ -30,7 +30,16 @@ class ValidationError extends ApiError {
   }
 }
 
+// The not found error
+class NotFoundError extends ApiError {
+  constructor(message, details) {
+    super(404, 'NOT_FOUND', message);
+    this.details = details;
+  }
+}
+
 module.exports = {
   ApiError,
   ValidationError,
+  NotFoundError,
 };
