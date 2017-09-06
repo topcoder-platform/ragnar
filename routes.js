@@ -21,4 +21,16 @@ module.exports = {
       method: 'addTeamMember',
     },
   },
+  '/gitlab/user/groups': {
+    get: {
+      controller: 'GitlabController',
+      method: 'listUserGroups',
+    },
+  },
+  '/gitlab/groups/:id/memberships/:username': {
+    post: {
+      controller: 'GitlabController',
+      method: 'addGroupMember',
+    },
+  },
 };
