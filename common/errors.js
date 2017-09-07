@@ -30,7 +30,34 @@ class ValidationError extends ApiError {
   }
 }
 
+// The not found error
+class NotFoundError extends ApiError {
+  constructor(message, details) {
+    super(404, 'NOT_FOUND', message);
+    this.details = details;
+  }
+}
+
+// The unauthorized error
+class UnauthorizedError extends ApiError {
+  constructor(message, details) {
+    super(401, 'UNAUTHORIZED', message);
+    this.details = details;
+  }
+}
+
+// The forbidden error
+class ForbiddenError extends ApiError {
+  constructor(message, details) {
+    super(403, 'FORBIDDEN', message);
+    this.details = details;
+  }
+}
+
 module.exports = {
   ApiError,
   ValidationError,
+  NotFoundError,
+  UnauthorizedError,
+  ForbiddenError,
 };

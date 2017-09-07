@@ -21,9 +21,22 @@ const SERVICE_ERROR = 'SERVICE_ERROR';
 // The service error status
 const SERVICE_ERROR_STATUS = 500;
 
+// The user roles
+const USER_ROLES = {
+  OWNER: 'owner',
+};
+
+// The user types
+const USER_TYPES = {
+  GITHUB: 'github',
+  GITLAB: 'gitlab',
+};
+
 module.exports = {
   DEFAULT_PER_PAGE,
   MAX_PER_PAGE,
   SERVICE_ERROR,
   SERVICE_ERROR_STATUS,
+  USER_ROLES,
+  USER_TYPES,
 };

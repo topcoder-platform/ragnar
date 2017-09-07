@@ -12,10 +12,16 @@ const util = require('util');
 const _ = require('lodash');
 const Joi = require('joi');
 const getParams = require('get-parameter-names');
+const bluebird = require('bluebird');
+const uuid = require('uuid/v4');
+const bcrypt = require('bcryptjs');
 const config = require('../config');
 const logger = require('./logger');
 const errors = require('./errors');
 const constants = require('./constants');
+const NotFoundError = require('./errors').NotFoundError;
+
+bluebird.promisifyAll(bcrypt);
 
 /**
  * Convert array with arguments to object
@@ -105,7 +111,11 @@ function buildController(controller) {
     controller[name] = (req, res, next) => {
       // Make sure to `.catch()` any errors and pass them along to the `next()`
       // middleware in the chain, in this case the error handler.
-      method(req, res).then((result) => res.json(result)).catch(next);
+      method(req, res).then((result) => {
+        if (!_.isNil(result)) {
+          res.json(result);
+        }
+      }).catch(next);
     };
   });
 }
@@ -124,8 +134,71 @@ function convertGitHubError(err, message) {
   return apiError;
 }
 
+/**
+ * Ensure entity exists for given criteria. Return error if no result.
+ * @param {Object} Model the mongoose model to query
+ * @param {Object|String|Number} criteria the criteria (if object) or id (if string/number)
+ * @returns {Object} the found entity
+ */
+async function ensureExists(Model, criteria) {
+  let query;
+  let byId = true;
+  if (_.isObject(criteria)) {
+    byId = false;
+    query = Model.findOne(criteria);
+  } else {
+    query = Model.findById(criteria);
+  }
+  const result = await query;
+  if (!result) {
+    let msg;
+    if (byId) {
+      msg = util.format('%s not found with id: %s', Model.modelName, criteria);
+    } else {
+      msg = util.format('%s not found with criteria: %j', Model.modelName, criteria);
+    }
+    throw new NotFoundError(msg);
+  }
+  return result;
+}
+
+/**
+ * Hash the given text.
+ *
+ * @param {String} text the text to hash
+ * @returns {String} the hashed string
+ */
+async function hashString(text) {
+  return await bcrypt.hashAsync(text, config.PASSWORD_HASH_SALT_LENGTH);
+}
+
+/**
+ * Validate that the hash is actually the hashed value of plain text
+ *
+ * @param {String} text   the text to validate
+ * @param {String} hash   the hash to validate
+ * @returns {Boolean} whether the text and hash match
+ */
+async function validateHash(text, hash) {
+  return await bcrypt.compareAsync(text, hash);
+}
+
+/**
+ * Generate an unique identifier
+ *
+ * @returns {String} the generated id
+ */
+function generateIdentifier() {
+  return `${uuid()}-${new Date().getTime()}`;
+}
+
+
 module.exports = {
   buildService,
   buildController,
   convertGitHubError,
+  ensureExists,
+  hashString,
+  validateHash,
+  generateIdentifier,
 };
