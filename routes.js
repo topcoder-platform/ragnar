@@ -9,18 +9,58 @@
  * @version 1.0
  */
 module.exports = {
-  '/github/user/teams': {
+  '/admin/login': {
+    post: {
+      controller: 'AdminController',
+      method: 'login',
+    },
+  },
+  '/admin/users': {
+    post: {
+      controller: 'AdminController',
+      method: 'saveUser',
+      isAdmin: true,
+    },
+  },
+
+  '/github/owneruser/login': {
     get: {
       controller: 'GithubController',
-      method: 'listUserTeams',
+      method: 'ownerUserLogin',
     },
   },
-  '/github/teams/:id/memberships/:username': {
-    put: {
+  '/github/owneruser/callback': {
+    get: {
       controller: 'GithubController',
-      method: 'addTeamMember',
+      method: 'ownerUserLoginCallback',
     },
   },
+
+  '/github/owneruser/teams': {
+    get: {
+      controller: 'GithubController',
+      method: 'listOwnerUserTeams',
+    },
+  },
+  '/github/teams/:id/registrationurl': {
+    get: {
+      controller: 'GithubController',
+      method: 'getTeamRegistrationUrl',
+    },
+  },
+  '/github/teams/registration/:identifier': {
+    get: {
+      controller: 'GithubController',
+      method: 'addUserToTeam',
+    },
+  },
+  '/github/normaluser/callback': {
+    get: {
+      controller: 'GithubController',
+      method: 'addUserToTeamCallback',
+    },
+  },
+
   '/gitlab/user/groups': {
     get: {
       controller: 'GitlabController',
