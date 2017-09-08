@@ -21,6 +21,17 @@ const SERVICE_ERROR = 'SERVICE_ERROR';
 // The service error status
 const SERVICE_ERROR_STATUS = 500;
 
+// The user roles
+const USER_ROLES = {
+  OWNER: 'owner',
+};
+
+// The user types
+const USER_TYPES = {
+  GITHUB: 'github',
+  GITLAB: 'gitlab',
+};
+
 // The default page size for Gitlab API
 const GITLAB_DEFAULT_PER_PAGE = 20;
 
@@ -36,6 +47,8 @@ module.exports = {
   MAX_PER_PAGE,
   SERVICE_ERROR,
   SERVICE_ERROR_STATUS,
+  USER_ROLES,
+  USER_TYPES,
   GITLAB_DEFAULT_PER_PAGE,
   GITLAB_MAX_PER_PAGE,
   GITLAB_DEFAULT_GROUP_ACCESS_LEVEL,

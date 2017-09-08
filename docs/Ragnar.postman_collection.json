@@ -1,12 +1,12 @@
 {
-	"id": "0965c0fe-f839-9cc9-aa22-21ac38e97dac",
+	"id": "49e2acb7-1322-978c-b3f6-5ef1e0a44371",
 	"name": "Ragnar",
 	"description": "",
 	"order": [
-		"3a8b8c72-f6e3-3b11-458b-0139386b5904",
-		"2c5aba47-f18b-ee18-4775-2b2604910eda",
-		"4ff566c8-0403-3e60-9b32-f1746da23e6d",
-		"8ee7ec40-f245-0ce2-1762-05e08ebc94cd"
+		"6c01a6e6-5da4-81b5-0329-cd87345cbe5b",
+		"9c322cc5-34db-44d2-87bd-86fff71a8dae",
+		"80846963-b730-a8ef-d419-96104e0d3498",
+		"809c9b4b-97bd-097b-e2d5-2f153a211316"
 	],
 	"folders": [],
 	"folders_order": [],
@@ -15,52 +15,36 @@
 	"public": false,
 	"requests": [
 		{
-			"id": "2c5aba47-f18b-ee18-4775-2b2604910eda",
-			"name": "Github - Add user to team",
-			"description": "",
-			"collectionId": "0965c0fe-f839-9cc9-aa22-21ac38e97dac",
-			"method": "PUT",
-			"headers": "",
-			"data": [],
-			"rawModeData": "",
-			"url": "{{URL}}/api/v1/github/teams/{{teamId}}/memberships/{{username}}",
-			"responses": [],
-			"queryParams": [],
-			"headerData": [],
-			"collection_id": "0965c0fe-f839-9cc9-aa22-21ac38e97dac"
-		},
-		{
-			"id": "3a8b8c72-f6e3-3b11-458b-0139386b5904",
-			"name": "Github - List user teams",
-			"description": "",
-			"collectionId": "0965c0fe-f839-9cc9-aa22-21ac38e97dac",
-			"method": "GET",
-			"headers": "",
-			"data": [],
-			"rawModeData": "",
-			"pathVariables": {},
-			"url": "{{URL}}/api/v1/github/user/teams?page=1&perPage=10",
-			"responses": [],
-			"pathVariableData": [],
-			"queryParams": [
+			"id": "6c01a6e6-5da4-81b5-0329-cd87345cbe5b",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
 				{
-					"key": "page",
-					"value": "1",
-					"equals": true,
-					"description": ""
-				},
-				{
-					"key": "perPage",
-					"value": "10",
-					"equals": true,
-					"description": ""
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
 				}
 			],
-			"headerData": [],
-			"collection_id": "0965c0fe-f839-9cc9-aa22-21ac38e97dac"
+			"url": "{{URL}}/api/v1/admin/login",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"ADMIN-TOKEN\", jsonData.token);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1504306539581,
+			"name": "Admin Login",
+			"description": "",
+			"collectionId": "49e2acb7-1322-978c-b3f6-5ef1e0a44371",
+			"responses": [],
+			"rawModeData": "{\n    \"username\": \"admin\",\n    \"password\": \"password\"\n}"
 		},
 		{
-			"id": "4ff566c8-0403-3e60-9b32-f1746da23e6d",
+			"id": "80846963-b730-a8ef-d419-96104e0d3498",
 			"headers": "",
 			"headerData": [],
 			"url": "{{URL}}/api/v1/gitlab/user/groups?page=1&perPage=10",
@@ -92,11 +76,13 @@
 			"time": 1504161377397,
 			"name": "Gitlab - List user groups",
 			"description": "",
-			"collectionId": "0965c0fe-f839-9cc9-aa22-21ac38e97dac",
-			"responses": []
+			"collectionId": "49e2acb7-1322-978c-b3f6-5ef1e0a44371",
+			"responses": [],
+			"isFromCollection": true,
+			"collectionRequestId": "4ff566c8-0403-3e60-9b32-f1746da23e6d"
 		},
 		{
-			"id": "8ee7ec40-f245-0ce2-1762-05e08ebc94cd",
+			"id": "809c9b4b-97bd-097b-e2d5-2f153a211316",
 			"headers": "",
 			"headerData": [],
 			"url": "{{URL}}/api/v1/gitlab/groups/{{gitlabGroupId}}/memberships/{{gitlabUsername}}",
@@ -113,8 +99,45 @@
 			"time": 1504162332880,
 			"name": "Gitlab - Add user to group",
 			"description": "",
-			"collectionId": "0965c0fe-f839-9cc9-aa22-21ac38e97dac",
-			"responses": []
+			"collectionId": "49e2acb7-1322-978c-b3f6-5ef1e0a44371",
+			"responses": [],
+			"isFromCollection": true,
+			"collectionRequestId": "8ee7ec40-f245-0ce2-1762-05e08ebc94cd"
+		},
+		{
+			"id": "9c322cc5-34db-44d2-87bd-86fff71a8dae",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{ADMIN-TOKEN}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{ADMIN-TOKEN}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{URL}}/api/v1/admin/users",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1504307593578,
+			"name": "Save User",
+			"description": "",
+			"collectionId": "49e2acb7-1322-978c-b3f6-5ef1e0a44371",
+			"responses": [],
+			"rawModeData": "{\n\t\"username\": \"zsudraco\",\n\t\"role\": \"owner\",\n\t\"type\": \"github\"\n}"
 		}
 	]
 }

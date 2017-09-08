@@ -9,8 +9,6 @@
  * @version 1.0
  */
 module.exports = {
-  // set to name of organization of configured github admin
-  TEST_ORG: 'my-test-organization-123',
   // gitlab group name to add user to,
   // the configured gitlab admin should own this group
   GITLAB_TEST_GROUP_NAME: 'my-testing-group2',
