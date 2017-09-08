@@ -1,60 +1,80 @@
 {
-	"variables": [],
-	"info": {
-		"name": "Ragnar",
-		"_postman_id": "f9fa3896-1f9e-70bd-176c-d2d2bd629fad",
-		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-	},
-	"item": [
+	"id": "49e2acb7-1322-978c-b3f6-5ef1e0a44371",
+	"name": "Ragnar",
+	"description": "",
+	"order": [
+		"6c01a6e6-5da4-81b5-0329-cd87345cbe5b",
+		"9c322cc5-34db-44d2-87bd-86fff71a8dae"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 0,
+	"owner": 0,
+	"public": false,
+	"requests": [
 		{
-			"name": "List user teams",
-			"request": {
-				"url": {
-					"raw": "{{URL}}/api/v1/github/user/teams?page=1&perPage=10",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"github",
-						"user",
-						"teams"
-					],
-					"query": [
-						{
-							"key": "page",
-							"value": "1",
-							"equals": true,
-							"description": ""
-						},
-						{
-							"key": "perPage",
-							"value": "10",
-							"equals": true,
-							"description": ""
-						}
-					],
-					"variable": []
-				},
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
+			"id": "6c01a6e6-5da4-81b5-0329-cd87345cbe5b",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{URL}}/api/v1/admin/login",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"ADMIN-TOKEN\", jsonData.token);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1504306539581,
+			"name": "Admin Login",
+			"description": "",
+			"collectionId": "49e2acb7-1322-978c-b3f6-5ef1e0a44371",
+			"responses": [],
+			"rawModeData": "{\n    \"username\": \"admin\",\n    \"password\": \"password\"\n}"
 		},
 		{
-			"name": "Add user to team",
-			"request": {
-				"url": "{{URL}}/api/v1/github/teams/{{teamId}}/memberships/{{username}}",
-				"method": "PUT",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
+			"id": "9c322cc5-34db-44d2-87bd-86fff71a8dae",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{ADMIN-TOKEN}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{ADMIN-TOKEN}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{URL}}/api/v1/admin/users",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1504306766043,
+			"name": "Save User",
+			"description": "",
+			"collectionId": "49e2acb7-1322-978c-b3f6-5ef1e0a44371",
+			"responses": [],
+			"rawModeData": "{\n\t\"username\": \"your-github-username\",\n\t\"role\": \"owner\",\n\t\"type\": \"github\"\n}"
 		}
 	]
 }
