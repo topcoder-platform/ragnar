@@ -13,44 +13,18 @@ const Joi = require('joi');
 const config = require('../config');
 const constants = require('../common/constants');
 const helper = require('../common/helper');
-const User = require('../models').User;
-const OwnerUserTeam = require('../models').OwnerUserTeam;
 
-
-/**
- * Ensure the owner user is in database.
- * @param {String} token the access token of owner user
- * @returns {Promise} the promise result of found owner user
- */
-async function ensureOwnerUser(token) {
-  let username;
-  try {
-    const github = new GitHub({token});
-    const user = await github.getUser().getProfile();
-    username = user.data.login;
-  } catch (err) {
-    throw helper.convertGitHubError(err, 'Failed to ensure valid owner user.');
-  }
-  return await helper.ensureExists(User,
-    {username, type: constants.USER_TYPES.GITHUB, role: constants.USER_ROLES.OWNER});
-}
-
-ensureOwnerUser.schema = Joi.object().keys({
-  token: Joi.string().required(),
-});
-
+const github = new GitHub(config.GITHUB_ACCOUNT);
 
 /**
- * List teams of owner user.
- * @param {String} token the access token of owner user
+ * List teams of user.
  * @param {Number} page the page number (default to be 1). Must be >= 1
  * @param {Number} perPage the page size (default to be constants.DEFAULT_PER_PAGE). Must be within range [1, constants.MAX_PER_PAGE]
  * @returns {Promise} the promise result
  */
-async function listOwnerUserTeams(token, page = 1, perPage = constants.DEFAULT_PER_PAGE) {
+async function listUserTeams(page = 1, perPage = constants.DEFAULT_PER_PAGE) {
   try {
-    const github = new GitHub({token});
-    const user = github.getUser();
+    const user = github.getUser(config.GITHUB_ACCOUNT.username);
     const response = await user._request('GET', '/user/teams', {page, per_page: perPage});
 
     const result = {
@@ -66,6 +40,7 @@ async function listOwnerUserTeams(token, page = 1, perPage = constants.DEFAULT_P
         if (link.endsWith('rel="last"')) {
           _result.lastPage = (link.match(/.*[?&]page=(\d+).*/) || [])[1] || 1;
         }
+
         return _result;
       }, result);
       result.lastPage = parseInt(result.lastPage, 10);
@@ -77,60 +52,20 @@ async function listOwnerUserTeams(token, page = 1, perPage = constants.DEFAULT_P
   }
 }
 
-listOwnerUserTeams.schema = Joi.object().keys({
-  token: Joi.string().required(),
+listUserTeams.schema = Joi.object().keys({
   page: Joi.number().integer().min(1).optional(),
   perPage: Joi.number().integer().min(1).max(constants.MAX_PER_PAGE)
     .optional(),
 });
 
 /**
- * Get owner user team registration URL.
- * @param {String} token the access token of owner user
- * @param {String} ownerUsername the owner user name
- * @param {String} teamId the team id
- * @returns {Promise} the promise result
- */
-async function getTeamRegistrationUrl(token, ownerUsername, teamId) {
-  // generate identifier
-  const identifier = helper.generateIdentifier();
-
-  // create owner user team
-  await OwnerUserTeam.create({
-    ownerUsername,
-    type: constants.USER_TYPES.GITHUB,
-    teamId,
-    ownerToken: token,
-    identifier,
-  });
-
-  // construct URL
-  const url = `${config.WEBSITE}/api/${config.API_VERSION}/github/teams/registration/${identifier}`;
-  return {url};
-}
-
-getTeamRegistrationUrl.schema = Joi.object().keys({
-  token: Joi.string().required(),
-  ownerUsername: Joi.string().required(),
-  teamId: Joi.string().required(),
-});
-
-/**
  * Add team member.
  * @param {String} teamId the team id
- * @param {String} ownerUserToken the owner user token
- * @param {String} normalUserToken the normal user token
+ * @param {String} username the username to add to team
  * @returns {Promise} the promise result
  */
-async function addTeamMember(teamId, ownerUserToken, normalUserToken) {
+async function addTeamMember(teamId, username) {
   try {
-    // get normal user name
-    const githubNormalUser = new GitHub({token: normalUserToken});
-    const normalUser = await githubNormalUser.getUser().getProfile();
-    const username = normalUser.data.login;
-
-    // add normal user to team
-    const github = new GitHub({token: ownerUserToken});
     const team = github.getTeam(teamId);
     const response = await team.addMembership(username);
     return response.data;
@@ -141,14 +76,11 @@ async function addTeamMember(teamId, ownerUserToken, normalUserToken) {
 
 addTeamMember.schema = Joi.object().keys({
   teamId: Joi.string().required(),
-  ownerUserToken: Joi.string().required(),
-  normalUserToken: Joi.string().required(),
+  username: Joi.string().required(),
 });
 
 module.exports = {
-  ensureOwnerUser,
-  listOwnerUserTeams,
-  getTeamRegistrationUrl,
+  listUserTeams,
   addTeamMember,
 };
 

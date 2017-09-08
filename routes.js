@@ -9,55 +9,28 @@
  * @version 1.0
  */
 module.exports = {
-  '/admin/login': {
+  '/github/user/teams': {
+    get: {
+      controller: 'GithubController',
+      method: 'listUserTeams',
+    },
+  },
+  '/github/teams/:id/memberships/:username': {
+    put: {
+      controller: 'GithubController',
+      method: 'addTeamMember',
+    },
+  },
+  '/gitlab/user/groups': {
+    get: {
+      controller: 'GitlabController',
+      method: 'listUserGroups',
+    },
+  },
+  '/gitlab/groups/:id/memberships/:username': {
     post: {
-      controller: 'AdminController',
-      method: 'login',
-    },
-  },
-  '/admin/users': {
-    post: {
-      controller: 'AdminController',
-      method: 'saveUser',
-      isAdmin: true,
-    },
-  },
-
-  '/github/owneruser/login': {
-    get: {
-      controller: 'GithubController',
-      method: 'ownerUserLogin',
-    },
-  },
-  '/github/owneruser/callback': {
-    get: {
-      controller: 'GithubController',
-      method: 'ownerUserLoginCallback',
-    },
-  },
-
-  '/github/owneruser/teams': {
-    get: {
-      controller: 'GithubController',
-      method: 'listOwnerUserTeams',
-    },
-  },
-  '/github/teams/:id/registrationurl': {
-    get: {
-      controller: 'GithubController',
-      method: 'getTeamRegistrationUrl',
-    },
-  },
-  '/github/teams/registration/:identifier': {
-    get: {
-      controller: 'GithubController',
-      method: 'addUserToTeam',
-    },
-  },
-  '/github/normaluser/callback': {
-    get: {
-      controller: 'GithubController',
-      method: 'addUserToTeamCallback',
+      controller: 'GitlabController',
+      method: 'addGroupMember',
     },
   },
 };
