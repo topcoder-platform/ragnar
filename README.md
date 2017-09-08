@@ -76,7 +76,7 @@ set GITLAB_API_PRIVATE_TOKEN=...
 
 ## GitHub OAuth App Setup
 
-- login into githum.com
+- login into github.com
 - click the upper right avatar, then click `Settings`
 - click the left pannel --> Developer settings --> OAuth Apps
 - click the `Register a new application`, fill in the fields,
@@ -187,4 +187,3 @@ Notes for Gitlab tests:
 - Github access token won't expire, so the generated team registration URL will always work
 - note that GitHub remembers your login and permission grant, if you granted the app once, it will automatically
   grant permission in the next OAuth flow
-
