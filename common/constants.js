@@ -32,6 +32,16 @@ const USER_TYPES = {
   GITLAB: 'gitlab',
 };
 
+// The default page size for Gitlab API
+const GITLAB_DEFAULT_PER_PAGE = 20;
+
+// The max page size for Gitlab API
+const GITLAB_MAX_PER_PAGE = 100;
+
+// The gitlab default group member access level,
+// the access level can be: 10 - GUEST, 20 - REPORTER, 30 - DEVELOPER, 40 - MASTER, 50 - OWNER
+const GITLAB_DEFAULT_GROUP_ACCESS_LEVEL = 30;
+
 module.exports = {
   DEFAULT_PER_PAGE,
   MAX_PER_PAGE,
@@ -39,4 +49,7 @@ module.exports = {
   SERVICE_ERROR_STATUS,
   USER_ROLES,
   USER_TYPES,
+  GITLAB_DEFAULT_PER_PAGE,
+  GITLAB_MAX_PER_PAGE,
+  GITLAB_DEFAULT_GROUP_ACCESS_LEVEL,
 };

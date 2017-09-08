@@ -28,6 +28,9 @@ npm run lint
 - GET /github/teams/registration/:identifier - normal user registers a team via this API, it will do GitHub OAuth
 - GET /github/normaluser/callback - normal user GitHub OAuth callback
 
+- GET /api/v1/gitlab/user/groups - List user Gitlab groups
+- PUT /api/v1/gitlab/groups/:id/memberships/:username - Add user to Gitlab group
+
 
 ## Configuration
 
@@ -49,6 +52,8 @@ The following config parameters are supported, they are defined in `config.js` a
 | WEBSITE                        | used as base to construct various URLs     | http://localhost:3000            |
 | OWNER_USER_LOGIN_SUCCESS_URL   | URL to show owner user login success       | /owner-user-login-success.html   |
 | USER_ADDED_TO_TEAM_SUCCESS_URL | URL to show success of adding user to team | /user-added-to-team-success.html |
+| GITLAB_API_BASE_URL            | The Gitlab API base URL                    | https://gitlab.com/api/v4        |
+| GITLAB_API_PRIVATE_TOKEN       | The Gitlab API private token               |                                  |
 
 
 
@@ -57,6 +62,7 @@ Normally you just need config the GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET:
 ```shell
 export GITHUB_CLIENT_ID=...
 export GITHUB_CLIENT_SECRET=...
+export GITLAB_API_PRIVATE_TOKEN=...
 ```
 
 Or on windows:
@@ -64,6 +70,7 @@ Or on windows:
 ```shell
 set GITHUB_CLIENT_ID=...
 set GITHUB_CLIENT_SECRET=...
+set GITLAB_API_PRIVATE_TOKEN=...
 ```
 
 
@@ -79,8 +86,29 @@ set GITHUB_CLIENT_SECRET=...
   these should be set to GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET environment variables
 
 
+## GitLab Setup
+
+The Gitlab API private token can be got in this way:
+- login into Gitlab
+- click the upper right avatar, then click `Settings`
+- Click the `Account` tab, there is `Private token` field there
+
+
 
 ## Unit Test
+
+For Gitlab:
+- login into Gitlab
+- click the upper right `+`, then click `New group`, fill in required fields to create group,
+  multiple groups can be created similarly
+- choose any created group name, configure it to `tests/config.js` GITLAB_TEST_GROUP_NAME field
+- configure another Gitlab user name to `tests/config.js` GITLAB_TEST_USERNAME field,
+  this user should be different than the admin user whose private token is used
+- Note that the admin user should not own more than 100 groups, otherwise the test may not find out
+  group of the configured group name
+- Also note that the configured test user name should not be member of the configured group,
+  if the user is already in the group, you may login into Gitlab as the test user, then leave the group
+
 
 Run:
 
@@ -119,7 +147,12 @@ After admin login, the admin token is automatically set to ADMIN-TOKEN environme
 and the `Save User` test can run, you may use the `Save User` test to create owner user of your GitHub username.
 
 
-## Verification
+Notes for Gitlab tests:
+- after running the `Gitlab - List user groups` API, you may choose any group, configure its group id to environment variable `gitlabGroupId`
+- the configured environment variable `gitlabUsername` should be another user different than the admin, and s/he is not in the configured group
+
+
+## GitHub Verification
 
 - run `npm run init-data` to initialize data
 - run `npm start` to start the app
@@ -151,11 +184,7 @@ and the `Save User` test can run, you may use the `Save User` test to create own
 
 ## Notes
 
-- the original Postman tests and unit tests are outdated, thus they are removed;
-  the current unit tests and Postman tests are to test admin functionalities;
-  the GitHub related functionalities involve GitHub OAuth, which requires user intervention,
-  so they are verified manually using browsers, see above Verification section for details.
-- good luck that Github access token won't expire, so the generated team registration URL will always work
+- Github access token won't expire, so the generated team registration URL will always work
 - note that GitHub remembers your login and permission grant, if you granted the app once, it will automatically
   grant permission in the next OAuth flow
 

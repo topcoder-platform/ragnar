@@ -135,6 +135,20 @@ function convertGitHubError(err, message) {
 }
 
 /**
+ * Convert gitlab api error.
+ * @param {Error} err the gitlab api error
+ * @param {String} message the error message
+ * @returns {Error} converted error
+ */
+function convertGitLabError(err, message) {
+  const apiError = new errors.ApiError(
+    err.status || _.get(err, 'response.status', constants.SERVICE_ERROR_STATUS),
+    _.get(err, 'response.body.message', constants.SERVICE_ERROR),
+    `${message}. ${err.message}. Detail: ${_.get(err, 'response.body.message')}`);
+  return apiError;
+}
+
+/**
  * Ensure entity exists for given criteria. Return error if no result.
  * @param {Object} Model the mongoose model to query
  * @param {Object|String|Number} criteria the criteria (if object) or id (if string/number)
@@ -197,6 +211,7 @@ module.exports = {
   buildService,
   buildController,
   convertGitHubError,
+  convertGitLabError,
   ensureExists,
   hashString,
   validateHash,
