@@ -1,0 +1,13 @@
+<div class="container" *ngIf="state.ready">
+  <h3>Your managed teams</h3>
+  <p><small>(Select a team to see the registration url )</small></p>
+  <div class="list-group">
+    <!-- list all teams and the register url -->
+    <ng-container *ngFor="let t of state.teams; let $i=index">
+      <a href="javascript:;" (click)="getSharableLink(t)" class="list-group-item list-group-item-action">{{$i+1}}. {{t.name}}</a>
+      <div class="list-group-item disabled" *ngIf="state.team===t.id&&state.links[state.team]">
+        Team url for <strong>{{t.name}}</strong> is: <code>{{state.links[state.team]}}</code>
+      </div>
+    </ng-container>
+  </div>
+</div>

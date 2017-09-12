@@ -16,7 +16,7 @@ const config = require('../config');
 const GithubService = require('../services/GithubService');
 const OwnerUserTeam = require('../models').OwnerUserTeam;
 
-const request = superagentPromise(superagent, Promise);
+const request=superagentPromise(superagent, Promise);
 
 /**
  * Owner user login.
@@ -30,7 +30,7 @@ async function ownerUserLogin(req, res) {
     req.session.state = helper.generateIdentifier();
   }
   // redirect to GitHub OAuth
-  const callbackUri = `${config.WEBSITE}/api/${config.API_VERSION}/github/owneruser/callback`;
+  const callbackUri = `${config.WEBSITE}${config.GITHUB_OWNER_CALLBACK_URL}`;
   res.redirect(`http://github.com/login/oauth/authorize?client_id=${
     config.GITHUB_CLIENT_ID
   }&redirect_uri=${
@@ -43,9 +43,9 @@ async function ownerUserLogin(req, res) {
 /**
  * Owner user login callback, redirected by GitHub.
  * @param {Object} req the request
- * @param {Object} res the response
+ * @returns {Object} success message
  */
-async function ownerUserLoginCallback(req, res) {
+async function ownerUserLoginCallback(req) {
   if (!req.session.state || req.query.state !== req.session.state) {
     throw new errors.ForbiddenError('Invalid state.');
   }
@@ -65,8 +65,9 @@ async function ownerUserLoginCallback(req, res) {
   // store access token to session
   req.session.ownerUserAccessToken = token;
   req.session.ownerUsername = ownerUser.username;
-  // redirect to success page
-  res.redirect(config.OWNER_USER_LOGIN_SUCCESS_URL);
+
+  // return success status
+  return {success: true, token, username: ownerUser.username};
 }
 
 /**
