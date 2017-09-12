@@ -9,10 +9,13 @@
         "node": "8"
     },
     "scripts": {
-        "start": "node app.js",
+        "start": "npm-run-all -p start:be start:fe",
+        "start:be": "node app.js",
+        "start:fe": "ng build --watch",
+        "build:fe:prod": "ng build -prod",
         "test": "node ./node_modules/mocha/bin/mocha --recursive --timeout 999999 --colors tests/*.test.js --bail",
         "init-data": "node init-data",
-        "lint": "eslint . --ext .js || true"
+        "lint": "eslint . --ignore-pattern 'public/*' --ext .js || true"
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",
@@ -31,12 +34,30 @@
         "superagent": "^3.6.0",
         "superagent-promise": "^1.1.0",
         "uuid": "^3.1.0",
-        "winston": "^2.3.1"
+        "winston": "^2.3.1",
+        "@angular/animations": "^4.2.4",
+        "@angular/common": "^4.2.4",
+        "@angular/compiler": "^4.2.4",
+        "@angular/core": "^4.2.4",
+        "@angular/forms": "^4.2.4",
+        "@angular/http": "^4.2.4",
+        "@angular/platform-browser": "^4.2.4",
+        "@angular/platform-browser-dynamic": "^4.2.4",
+        "@angular/router": "^4.2.4",
+        "angular2-jwt": "^0.2.3",
+        "core-js": "^2.4.1",
+        "rxjs": "^5.4.2",
+        "zone.js": "^0.8.14"
     },
     "devDependencies": {
         "chai": "^4.1.1",
         "eslint-config-topcoder": "^2.0.0",
         "mocha": "^3.5.0",
-        "supertest": "^3.0.0"
+        "npm-run-all": "^4.1.1",
+        "supertest": "^3.0.0",
+        "@angular/cli": "1.4.0",
+        "@angular/compiler-cli": "^4.2.4",
+        "@angular/language-service": "^4.2.4",
+        "typescript": "~2.3.3"
     }
 }

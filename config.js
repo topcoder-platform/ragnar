@@ -22,8 +22,9 @@ module.exports = {
   GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
   // used as base to construct various URLs
   WEBSITE: process.env.WEBSITE || 'http://localhost:3000',
-  OWNER_USER_LOGIN_SUCCESS_URL: process.env.OWNER_USER_LOGIN_SUCCESS_URL || '/owner-user-login-success.html',
-  USER_ADDED_TO_TEAM_SUCCESS_URL: process.env.USER_ADDED_TO_TEAM_SUCCESS_URL || '/user-added-to-team-success.html',
+  GITHUB_OWNER_CALLBACK_URL: process.env.GITHUB_OWNER_CALLBACK_URL || '/app/owner-login',
+  OWNER_USER_LOGIN_SUCCESS_URL: process.env.OWNER_USER_LOGIN_SUCCESS_URL || '/app/owner',
+  USER_ADDED_TO_TEAM_SUCCESS_URL: process.env.USER_ADDED_TO_TEAM_SUCCESS_URL || '/app/members/added',
   GITLAB_API_BASE_URL: process.env.GITLAB_API_BASE_URL || 'https://gitlab.com/api/v4',
   GITLAB_API_PRIVATE_TOKEN: process.env.GITLAB_API_PRIVATE_TOKEN,
 };

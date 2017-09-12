@@ -28,6 +28,8 @@ app.use(session({secret: config.SESSION_SECRET, resave: false, saveUninitialized
 
 // static content
 app.use(express.static(Path.join(__dirname, 'public')));
+// mount the angular app
+app.use('/app**', express.static(Path.join(__dirname, 'public')));
 
 // Load routes
 _.forEach(routes, (verbs, path) => {
