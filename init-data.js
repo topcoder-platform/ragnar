@@ -4,6 +4,7 @@
 const Admin = require('./models').Admin;
 const User = require('./models').User;
 const OwnerUserTeam = require('./models').OwnerUserTeam;
+const OwnerUserGroup = require('./models').OwnerUserGroup;
 const logger = require('./common/logger');
 const helper = require('./common/helper');
 
@@ -18,6 +19,7 @@ const helper = require('./common/helper');
 
   await User.remove();
   await OwnerUserTeam.remove();
+  await OwnerUserGroup.remove();
 })().then(() => {
   logger.info('done');
   process.exit(); // eslint-disable-line no-process-exit

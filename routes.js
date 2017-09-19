@@ -61,16 +61,41 @@ module.exports = {
     },
   },
 
-  '/gitlab/user/groups': {
+  '/gitlab/owneruser/login': {
     get: {
       controller: 'GitlabController',
-      method: 'listUserGroups',
+      method: 'ownerUserLogin',
     },
   },
-  '/gitlab/groups/:id/memberships/:username': {
-    post: {
+  '/gitlab/owneruser/callback': {
+    get: {
       controller: 'GitlabController',
-      method: 'addGroupMember',
+      method: 'ownerUserLoginCallback',
+    },
+  },
+
+  '/gitlab/owneruser/groups': {
+    get: {
+      controller: 'GitlabController',
+      method: 'listOwnerUserGroups',
+    },
+  },
+  '/gitlab/groups/:id/registrationurl': {
+    get: {
+      controller: 'GitlabController',
+      method: 'getGroupRegistrationUrl',
+    },
+  },
+  '/gitlab/groups/registration/:identifier': {
+    get: {
+      controller: 'GitlabController',
+      method: 'addUserToGroup',
+    },
+  },
+  '/gitlab/normaluser/callback': {
+    get: {
+      controller: 'GitlabController',
+      method: 'addUserToGroupCallback',
     },
   },
 };

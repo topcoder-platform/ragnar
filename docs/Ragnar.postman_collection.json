@@ -5,8 +5,7 @@
 	"order": [
 		"6c01a6e6-5da4-81b5-0329-cd87345cbe5b",
 		"9c322cc5-34db-44d2-87bd-86fff71a8dae",
-		"80846963-b730-a8ef-d419-96104e0d3498",
-		"809c9b4b-97bd-097b-e2d5-2f153a211316"
+		"c992c36d-640f-86e7-2a27-f56377e1fd07"
 	],
 	"folders": [],
 	"folders_order": [],
@@ -44,67 +43,6 @@
 			"rawModeData": "{\n    \"username\": \"admin\",\n    \"password\": \"password\"\n}"
 		},
 		{
-			"id": "80846963-b730-a8ef-d419-96104e0d3498",
-			"headers": "",
-			"headerData": [],
-			"url": "{{URL}}/api/v1/gitlab/user/groups?page=1&perPage=10",
-			"queryParams": [
-				{
-					"key": "page",
-					"value": "1",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "perPage",
-					"value": "10",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				}
-			],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": [],
-			"dataMode": "params",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1504161377397,
-			"name": "Gitlab - List user groups",
-			"description": "",
-			"collectionId": "49e2acb7-1322-978c-b3f6-5ef1e0a44371",
-			"responses": [],
-			"isFromCollection": true,
-			"collectionRequestId": "4ff566c8-0403-3e60-9b32-f1746da23e6d"
-		},
-		{
-			"id": "809c9b4b-97bd-097b-e2d5-2f153a211316",
-			"headers": "",
-			"headerData": [],
-			"url": "{{URL}}/api/v1/gitlab/groups/{{gitlabGroupId}}/memberships/{{gitlabUsername}}",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "params",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1504162332880,
-			"name": "Gitlab - Add user to group",
-			"description": "",
-			"collectionId": "49e2acb7-1322-978c-b3f6-5ef1e0a44371",
-			"responses": [],
-			"isFromCollection": true,
-			"collectionRequestId": "8ee7ec40-f245-0ce2-1762-05e08ebc94cd"
-		},
-		{
 			"id": "9c322cc5-34db-44d2-87bd-86fff71a8dae",
 			"headers": "Content-Type: application/json\nAuthorization: Bearer {{ADMIN-TOKEN}}\n",
 			"headerData": [
@@ -132,12 +70,47 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1504307593578,
-			"name": "Save User",
+			"time": 1505327033984,
+			"name": "Save GitHub User",
 			"description": "",
 			"collectionId": "49e2acb7-1322-978c-b3f6-5ef1e0a44371",
 			"responses": [],
-			"rawModeData": "{\n\t\"username\": \"zsudraco\",\n\t\"role\": \"owner\",\n\t\"type\": \"github\"\n}"
+			"rawModeData": "{\n\t\"username\": \"your-github-username\",\n\t\"role\": \"owner\",\n\t\"type\": \"github\"\n}"
+		},
+		{
+			"id": "c992c36d-640f-86e7-2a27-f56377e1fd07",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{ADMIN-TOKEN}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{ADMIN-TOKEN}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{URL}}/api/v1/admin/users",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1505327045199,
+			"name": "Save GitLab User",
+			"description": "",
+			"collectionId": "49e2acb7-1322-978c-b3f6-5ef1e0a44371",
+			"responses": [],
+			"rawModeData": "{\n\t\"username\": \"your-gitlab-username\",\n\t\"role\": \"owner\",\n\t\"type\": \"gitlab\"\n}"
 		}
 	]
 }

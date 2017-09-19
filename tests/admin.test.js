@@ -16,6 +16,7 @@ const constants = require('../common/constants');
 const Admin = require('../models').Admin;
 const User = require('../models').User;
 const OwnerUserTeam = require('../models').OwnerUserTeam;
+const OwnerUserGroup = require('../models').OwnerUserGroup;
 const helper = require('../common/helper');
 
 chai.should();
@@ -34,12 +35,14 @@ describe('Test Admin Functionalities', () => {
 
     await User.remove();
     await OwnerUserTeam.remove();
+    await OwnerUserGroup.remove();
   });
 
   after(async() => {
     await Admin.remove();
     await User.remove();
     await OwnerUserTeam.remove();
+    await OwnerUserGroup.remove();
   });
 
   it('admin login, missing username, 400 error expected', async() => {
@@ -100,7 +103,7 @@ describe('Test Admin Functionalities', () => {
       .expect(401);
   });
 
-  it('save user successfully', async() => {
+  it('save github user successfully', async() => {
     // create user
     let response = await api.post('/api/v1/admin/users').set('Authorization', `Bearer ${adminToken}`)
       .send({username: 'someuser', role: constants.USER_ROLES.OWNER, type: constants.USER_TYPES.GITHUB})
@@ -118,6 +121,27 @@ describe('Test Admin Functionalities', () => {
     response.body.should.have.property('username', 'someuser');
     response.body.should.have.property('role', constants.USER_ROLES.OWNER);
     response.body.should.have.property('type', constants.USER_TYPES.GITHUB);
+    response.body.should.have.property('id', savedUserId);
+  });
+
+  it('save gitlab user successfully', async() => {
+    // create user
+    let response = await api.post('/api/v1/admin/users').set('Authorization', `Bearer ${adminToken}`)
+      .send({username: 'someuser', role: constants.USER_ROLES.OWNER, type: constants.USER_TYPES.GITLAB})
+      .expect(200);
+    response.body.should.have.property('username', 'someuser');
+    response.body.should.have.property('role', constants.USER_ROLES.OWNER);
+    response.body.should.have.property('type', constants.USER_TYPES.GITLAB);
+    response.body.should.have.property('id');
+    const savedUserId = response.body.id;
+
+    // save same user, user is updated, id is not changed
+    response = await api.post('/api/v1/admin/users').set('Authorization', `Bearer ${adminToken}`)
+      .send({username: 'someuser', role: constants.USER_ROLES.OWNER, type: constants.USER_TYPES.GITLAB})
+      .expect(200);
+    response.body.should.have.property('username', 'someuser');
+    response.body.should.have.property('role', constants.USER_ROLES.OWNER);
+    response.body.should.have.property('type', constants.USER_TYPES.GITLAB);
     response.body.should.have.property('id', savedUserId);
   });
 });
