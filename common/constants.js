@@ -42,6 +42,12 @@ const GITLAB_MAX_PER_PAGE = 100;
 // the access level can be: 10 - GUEST, 20 - REPORTER, 30 - DEVELOPER, 40 - MASTER, 50 - OWNER
 const GITLAB_DEFAULT_GROUP_ACCESS_LEVEL = 30;
 
+// The Gitlab access token default expiration in seconds
+const GITLAB_ACCESS_TOKEN_DEFAULT_EXPIRATION = 3600;
+
+// The Gitlab refresh token time in seconds before expiration
+const GITLAB_REFRESH_TOKEN_BEFORE_EXPIRATION = 300;
+
 module.exports = {
   DEFAULT_PER_PAGE,
   MAX_PER_PAGE,
@@ -52,4 +58,6 @@ module.exports = {
   GITLAB_DEFAULT_PER_PAGE,
   GITLAB_MAX_PER_PAGE,
   GITLAB_DEFAULT_GROUP_ACCESS_LEVEL,
+  GITLAB_ACCESS_TOKEN_DEFAULT_EXPIRATION,
+  GITLAB_REFRESH_TOKEN_BEFORE_EXPIRATION,
 };

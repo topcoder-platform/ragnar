@@ -16,7 +16,7 @@ const config = require('../config');
 const GithubService = require('../services/GithubService');
 const OwnerUserTeam = require('../models').OwnerUserTeam;
 
-const request=superagentPromise(superagent, Promise);
+const request = superagentPromise(superagent, Promise);
 
 /**
  * Owner user login.
@@ -83,7 +83,7 @@ async function listOwnerUserTeams(req) {
 }
 
 /**
- * List teams of owner user.
+ * Get team registration URL.
  * @param {Object} req the request
  * @returns {Object} the team registration URL
  */
