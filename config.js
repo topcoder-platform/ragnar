@@ -26,5 +26,10 @@ module.exports = {
   OWNER_USER_LOGIN_SUCCESS_URL: process.env.OWNER_USER_LOGIN_SUCCESS_URL || '/app/owner',
   USER_ADDED_TO_TEAM_SUCCESS_URL: process.env.USER_ADDED_TO_TEAM_SUCCESS_URL || '/app/members/added',
   GITLAB_API_BASE_URL: process.env.GITLAB_API_BASE_URL || 'https://gitlab.com/api/v4',
-  GITLAB_API_PRIVATE_TOKEN: process.env.GITLAB_API_PRIVATE_TOKEN,
+  GITLAB_CLIENT_ID: process.env.GITLAB_CLIENT_ID,
+  GITLAB_CLIENT_SECRET: process.env.GITLAB_CLIENT_SECRET,
+  GITLAB_OWNER_USER_LOGIN_SUCCESS_URL:
+    process.env.GITLAB_OWNER_USER_LOGIN_SUCCESS_URL || 'http://gitlab.com',
+  GITLAB_USER_ADDED_TO_GROUP_SUCCESS_URL:
+    process.env.GITLAB_USER_ADDED_TO_GROUP_SUCCESS_URL || 'http://gitlab.com',
 };
