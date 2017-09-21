@@ -6,7 +6,8 @@
     "license": "ISC",
     "main": "app.js",
     "engines": {
-        "node": "8"
+        "node": "8",
+        "npm": "5"
     },
     "scripts": {
         "start": "npm-run-all -p start:be start:fe",
