@@ -2,6 +2,7 @@ node_modules/
 .history
 .vscode
 .env
+public/
 
 # compiled output
 /tmp
