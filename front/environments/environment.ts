@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   api: {
-    base: 'http://localhost:3000/api/v1',
+    base: 'https://lagertha-dev.herokuapp.com/api/v1',
     admin: '/admin/login',
     users: '/admin/users',
     ownerLoginCB: '/github/owneruser/callback',
