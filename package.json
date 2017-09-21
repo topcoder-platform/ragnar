@@ -4,6 +4,7 @@
     "description": "lagertha app",
     "author": "TCSCODER",
     "license": "ISC",
+    "private": true,
     "main": "app.js",
     "engines": {
         "node": "8",
