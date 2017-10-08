@@ -1,0 +1,20 @@
+<div class="container" *ngIf="state.ready">
+  <h3>Your managed groups</h3>
+  <p><small>(Select a group to see the registration url )</small></p>
+  <div class="list-group">
+    <!-- list all groups and the register url -->
+    <ng-container *ngFor="let g of state.groups; let $i=index">
+      <a href="javascript:;" (click)="getSharableLink(g)" class="list-group-item list-group-item-action">{{$i+1}}. {{g.name}}</a>
+      <div class="list-group-item disabled" *ngIf="state.group===g.id&&state.links[state.group]">
+        Group url for <strong>{{g.name}}</strong> is: <code>{{state.links[state.group]}}</code>
+      </div>
+    </ng-container>
+  </div>
+  <br/>
+  <div class="form-group">
+    Page:
+    <select class="form-control page" id="page" name="page" [(ngModel)]="state.page" (change)="changePage()">
+      <option *ngFor="let p of getPages()">{{p}}</option>
+    </select>
+  </div>
+</div>
