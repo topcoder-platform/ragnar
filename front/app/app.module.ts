@@ -13,18 +13,24 @@ import { AppRoutingModule } from './app-routing.module';
 // app pages
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { UsersPageComponent } from './pages/users-page/users-page.component';
-import { OwnerPageComponent } from './pages/owner-page/owner-page.component';
-import { OwnerLoginComponent } from './pages/owner-page/owner-login.component';
-import { MemberAddedPageComponent } from './pages/members/member-added-page.component';
+import { GithubOwnerPageComponent } from './pages/github-owner-page/owner-page.component';
+import { GithubOwnerLoginComponent } from './pages/github-owner-page/owner-login.component';
+import { GithubMemberAddedPageComponent } from './pages/github-members/member-added-page.component';
+import { GitlabOwnerPageComponent } from './pages/gitlab-owner-page/owner-page.component';
+import { GitlabOwnerLoginComponent } from './pages/gitlab-owner-page/owner-login.component';
+import { GitlabMemberAddedPageComponent } from './pages/gitlab-members/member-added-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     UsersPageComponent,
-    OwnerPageComponent,
-    OwnerLoginComponent,
-    MemberAddedPageComponent,
+    GithubOwnerPageComponent,
+    GithubOwnerLoginComponent,
+    GithubMemberAddedPageComponent,
+    GitlabOwnerPageComponent,
+    GitlabOwnerLoginComponent,
+    GitlabMemberAddedPageComponent,
   ],
   imports: [
     BrowserModule,
