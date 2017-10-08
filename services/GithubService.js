@@ -15,6 +15,7 @@ const constants = require('../common/constants');
 const helper = require('../common/helper');
 const User = require('../models').User;
 const OwnerUserTeam = require('../models').OwnerUserTeam;
+const errors = require('../common/errors');
 
 
 /**
@@ -92,6 +93,20 @@ listOwnerUserTeams.schema = Joi.object().keys({
  * @returns {Promise} the promise result
  */
 async function getTeamRegistrationUrl(token, ownerUsername, teamId) {
+  // check whether owner user can add team member to the team
+  let membershipData;
+  try {
+    const github = new GitHub({token});
+    const team = github.getTeam(teamId);
+    const response = await team.getMembership(ownerUsername);
+    membershipData = response.data;
+  } catch (err) {
+    throw helper.convertGitHubError(err, 'Failed to get team membership details.');
+  }
+  if (!membershipData || membershipData.role !== 'maintainer' || membershipData.state !== 'active') {
+    throw new errors.ForbiddenError('The owner user can not add member to the team.');
+  }
+
   // generate identifier
   const identifier = helper.generateIdentifier();
 

@@ -11,20 +11,30 @@ import { apiUrl } from 'app/common/api-urls';
 export class UsersPageComponent {
   public user: any = {};
   public userAdded = false;
+  public msg: string = null;
 
   constructor(public http: AuthHttp) {}
 
   /**
    * addUser Add owner to db
    * @param {string} username The username to be added
+   * @param {string} type The user type
    */
-  addUser(username: string) {
+  addUser(username: string, type: string) {
     this.clear();
+    if (!username || username.length === 0) {
+      this.msg = 'Missing user name.';
+      return;
+    }
+    if (!type || type.length === 0) {
+      this.msg = 'Missing user type.';
+      return;
+    }
 
     this.http.post(apiUrl('users'), {
       username,
       "role": "owner",
-      "type": "github",
+      type,
     }).subscribe((res) => {
       this.userAdded = true;
       this.user = {};
@@ -36,5 +46,6 @@ export class UsersPageComponent {
    */
   clear() {
     this.userAdded = false;
+    this.msg = null;
   }
 }

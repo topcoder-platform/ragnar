@@ -1,6 +1,8 @@
 <div class="container" *ngIf="state.ready">
   <h3>Your managed teams</h3>
   <p><small>(Select a team to see the registration url )</small></p>
+  <!-- show error message -->
+  <p class="form-error">{{errorMsg}}</p>
   <div class="list-group">
     <!-- list all teams and the register url -->
     <ng-container *ngFor="let t of state.teams; let $i=index">
@@ -9,5 +11,12 @@
         Team url for <strong>{{t.name}}</strong> is: <code>{{state.links[state.team]}}</code>
       </div>
     </ng-container>
+  </div>
+  <br/>
+  <div class="form-group">
+    Page:
+    <select class="form-control page" id="page" name="page" [(ngModel)]="state.page" (change)="changePage()">
+      <option *ngFor="let p of getPages()">{{p}}</option>
+    </select>
   </div>
 </div>
