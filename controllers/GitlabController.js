@@ -35,7 +35,7 @@ async function ownerUserLogin(req, res) {
     req.session.state = helper.generateIdentifier();
   }
   // redirect to GitLab OAuth
-  const callbackUri = `${config.WEBSITE}/api/${config.API_VERSION}/gitlab/owneruser/callback`;
+  const callbackUri = `${config.WEBSITE}${config.GITLAB_OWNER_CALLBACK_URL}`;
   res.redirect(`https://gitlab.com/oauth/authorize?client_id=${
     config.GITLAB_CLIENT_ID
   }&redirect_uri=${
@@ -64,7 +64,7 @@ async function ownerUserLoginCallback(req, res) {
       client_secret: config.GITLAB_CLIENT_SECRET,
       code,
       grant_type: 'authorization_code',
-      redirect_uri: `${config.WEBSITE}/api/${config.API_VERSION}/gitlab/owneruser/callback`,
+      redirect_uri: `${config.WEBSITE}${config.GITLAB_OWNER_CALLBACK_URL}`,
     })
     .end();
   const accessToken = result.body.access_token;
@@ -136,6 +136,9 @@ async function addUserToGroup(req, res) {
  * @param {Object} res the response
  */
 async function addUserToGroupCallback(req, res) {
+  if (req.query.error_description) {
+    throw new errors.ForbiddenError(req.query.error_description.replace(/\+/g, ' '));
+  }
   if (!req.session.identifier || req.query.state !== req.session.identifier) {
     throw new errors.ForbiddenError('Invalid state.');
   }

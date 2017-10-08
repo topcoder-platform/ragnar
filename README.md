@@ -55,14 +55,15 @@ The following config parameters are supported, they are defined in `config.js` a
 | GITHUB_CLIENT_ID                       | the GitHub client id                       |                                  |
 | GITHUB_CLIENT_SECRET                   | the GitHub client secret                   |                                  |
 | WEBSITE                                | used as base to construct various URLs     | http://localhost:3000            |
-| GITHUB_OWNER_CALLBACK_URL              | URL to handle github login callback        | /app/owner-login                 |
-| OWNER_USER_LOGIN_SUCCESS_URL           | URL to show owner user login success       | /app/owner                       |
-| USER_ADDED_TO_TEAM_SUCCESS_URL         | URL to show success of adding user to team | /app/members/added               |
+| GITHUB_OWNER_CALLBACK_URL              | URL to handle github login callback        | /app/github-owner-login          |
+| OWNER_USER_LOGIN_SUCCESS_URL           | URL to show owner user login success       | /app/github-owner                |
+| USER_ADDED_TO_TEAM_SUCCESS_URL         | URL to show success of adding user to team | /app/github-members/added        |
 | GITLAB_API_BASE_URL                    | The Gitlab API base URL                    | https://gitlab.com/api/v4        |
 | GITLAB_CLIENT_ID                       | the GitLab client id                       |                                  |
 | GITLAB_CLIENT_SECRET                   | the GitLab client secret                   |                                  |
-| GITLAB_OWNER_USER_LOGIN_SUCCESS_URL    | URL to show owner user login success       | /owner-user-login-success.html   |
-| GITLAB_USER_ADDED_TO_GROUP_SUCCESS_URL | URL to show success of adding user to group| /user-added-to-group-success.html|
+| GITLAB_OWNER_CALLBACK_URL              | URL to handle gitlab login callback        | /app/gitlab-owner-login          |
+| GITLAB_OWNER_USER_LOGIN_SUCCESS_URL    | URL to show owner user login success       | /app/gitlab-owner                |
+| GITLAB_USER_ADDED_TO_GROUP_SUCCESS_URL | URL to show success of adding user to group| /app/gitlab-members/added        |
 
 
 
@@ -104,7 +105,7 @@ set GITLAB_CLIENT_SECRET=...
 - click the `Applications` tab
 - enter application name, e.g. `Ragnar-tool`
 - for Redirect URI, enter two callback URLs, one callback URL per line, so there are two lines:
-  http://localhost:3000/api/v1/gitlab/owneruser/callback
+  http://localhost:3000/app/gitlab-owner-login
   http://localhost:3000/api/v1/gitlab/normaluser/callback
 - for Scopes, check the `api` and `read_user`, the `api` is for owner user, the `read_user` is for normal user
 - finnally click `Save application` to save the OAuth app, then you will see its generated Application Id and Secret,
@@ -221,12 +222,6 @@ note that you must modify the request body username to use your GitHub/GitLab us
   For this reason, the token data for the GitLab owner user are stored in User model (accessToken, accessTokenExpiration,
   refreshToken fields), instead of stored in OwnerUserGroup;
   when adding normal user to group, the access token is got from User model, and refresh it if needed.
-- For GitLab OAuth, when owner user login successfully, or when normal user is successfully added to group,
-  it will redirect user to gitlab.com site, this should be changed to redirect to some pages in the front end,
-  similar to GitHub part. These UI changes are out of scope, they are to be done in next challenge.
-- Similar to GitHub part, the previous GitLab unit tests and Postman tests are outdated and are removed;
-  the admin unit tests add a test to test adding gitlab user;
-  the Postman `Save GitLab User` test is added to add gitlab user.
 
 
 
@@ -239,9 +234,12 @@ The app is mounted on `/app` so we can instruct express to always point to `inde
 ## App paths
 - `/app/login` > Login for the admin
 - `/app/users` > Allows admin to add a github user (add owners)
-- `/app/owner` > Shows the teams an owner is part of, if user isn't logged in to github he is redirected to oAuth flow
-- `/app/members/added` > Page shown after a user was successfully added to a team by using the team url
-- `/app/owner-login` > Github login callback for owners
+- `/app/github-owner` > Shows the teams an owner is part of, if user isn't logged in to github he is redirected to oAuth flow
+- `/app/github-members/added` > Page shown after a user was successfully added to a team by using the team url
+- `/app/github-owner-login` > Github login callback for owners
+- `/app/gitlab-owner` > Shows the groups an owner is part of, if user isn't logged in to gitlab he is redirected to oAuth flow
+- `/app/gitlab-members/added` > Page shown after a user was successfully added to a group by using the group url
+- `/app/gitlab-owner-login` > Gitlab login callback for owners
 
 ## FE Configs
 The frontend config file mainly contains the api urls. It is located in `front/environments/environment.ts`. If building for prod,
@@ -262,3 +260,43 @@ The built code is available in the public folder
 
 ## Login as admin
 For admin login use the credentials generated by the `npm run init-data` command described above.
+
+## Verification
+- `npm run init-data`
+- `npm start`
+- browse `http://localhost:3000/app`, login with credential `admin` / `password`
+- add your github usernmae as owner, and add your gitlab username as owner
+- browse `http://localhost:3000/app`, login using github
+- after the github OAuth login flow, you will see your teams
+- click a team, then registration URL is generated and shown, the URL can be sent to other github users
+  to register to the team, when accessing the URL by other github users, another OAuth flow will start,
+  and finally a success page is shown.
+  Note that if you are testing using same browser, you need to logout the owner so that other users can login
+  to register to the team.
+- browse `http://localhost:3000/app`, login using gitlab
+- after the gitlab OAuth login flow, you will see your groups
+- click a group, then registration URL is generated and shown, the URL can be sent to other gitlab users
+  to register to the group, when accessing the URL by other gitlab users, another OAuth flow will start,
+  and finally a success page is shown.
+  Note that if you are testing using same browser, you need to logout the owner so that other users can login
+  to register to the group, and that user should NOT be in the group.
+
+
+## Notes
+
+- the github owner teams page and gitlab owner groups page are quite different, so I separate them into two pages:
+  their naming are different (team vs. group);
+  their called backend API are different;
+  the responses from back end are different;
+  their error handling are different;
+- some enhancements are done:
+  added input validation and error messages;
+  improved some front end code;
+  improved error message if gitlab owner user denies the OAuth flow;
+  improved error message if gitlab normal user denies the OAuth flow;
+- there is one important functionality missed in original UI, the back end list owner user teams/groups API support
+  pagination, but the original UI simiply shows the first page;
+  instead, pagination should be supported, and user can browse other pages;
+  the github owner user teams page and gitlab owner user groups page now supports pagination.
+  The default page sizes are used.
+

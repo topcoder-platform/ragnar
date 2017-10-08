@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 
 import { Auth } from 'app/common/auth/auth-service';
+import { apiUrl } from 'app/common/api-urls';
 
 @Component({
   selector: 'app-login-page',
@@ -21,6 +22,14 @@ export class LoginPageComponent {
    */
   login(username: string, password: string) {
     this.clear();
+    if (!username || username.length === 0) {
+      this.loginError = 'Missing user name.';
+      return;
+    }
+    if (!password || password.length === 0) {
+      this.loginError = 'Missing password.';
+      return;
+    }
 
     this.auth.login(username, password)
       .subscribe((d) => d.success && this.router.navigate(['/users']), (r) => {
@@ -38,5 +47,19 @@ export class LoginPageComponent {
    */
   clear() {
     this.loginError = '';
+  }
+
+  /**
+   * Github login
+   */
+  loginGithub() {
+    window.location.href = apiUrl('githubOwnerLogin');
+  }
+
+  /**
+   * Gitlab login
+   */
+  loginGitlab() {
+    window.location.href = apiUrl('gitlabOwnerLogin');
   }
 }

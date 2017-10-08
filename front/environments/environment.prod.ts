@@ -4,9 +4,13 @@ export const environment = {
     base: 'http://localhost:3000/api/v1',
     admin: '/admin/login',
     users: '/admin/users',
-    ownerLoginCB: '/github/owneruser/callback',
-    ownerLogin: '/github/owneruser/login',
-    ownerTeams: '/github/owneruser/teams',
-    ownerTeamUrl: '/github/teams/:teamid:/registrationurl'
+    githubOwnerLoginCB: '/github/owneruser/callback',
+    githubOwnerLogin: '/github/owneruser/login',
+    githubOwnerTeams: '/github/owneruser/teams',
+    githubOwnerTeamUrl: '/github/teams/:teamid:/registrationurl',
+    gitlabOwnerLoginCB: '/gitlab/owneruser/callback',
+    gitlabOwnerLogin: '/gitlab/owneruser/login',
+    gitlabOwnerGroups: '/gitlab/owneruser/groups',
+    gitlabOwnerGroupUrl: '/gitlab/groups/:groupid:/registrationurl'
   }
 };
