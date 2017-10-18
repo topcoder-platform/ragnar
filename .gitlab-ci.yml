@@ -5,6 +5,9 @@ variables:
   APP_TITLE: "Lagertha app"
   NODE_ENV: development
 
+services:
+  - mongo
+
 cache:
   paths:
   - node_modules/
@@ -22,9 +25,9 @@ building:
 
 testing:
   script:
-    - echo "Skipping tests"
-    # - npm i
-    # - npm test
+    - echo "Running tests"
+    - npm i
+    - npm test
   stage: test
 
 deploy_dev:
@@ -57,3 +60,4 @@ deploy_stage:
 variables:
   GIT_STRATEGY: fetch
   GIT_SUBMODULE_STRATEGY: recursive
+  MONGODB_URI: mongodb://mongo:27017/ragnar'

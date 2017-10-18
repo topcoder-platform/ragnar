@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   api: {
-    base: 'http://localhost:3000/api/v1',
+    base: 'http://ragnar.topcoder.com/api/v1',
     admin: '/admin/login',
     users: '/admin/users',
     githubOwnerLoginCB: '/github/owneruser/callback',
