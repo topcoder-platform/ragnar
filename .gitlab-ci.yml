@@ -22,9 +22,9 @@ building:
 
 testing:
   script:
-    - echo "Skipping tests"
-    # - npm i
-    # - npm test
+    - echo "Running tests"
+    - npm i
+    - npm test
   stage: test
 
 deploy_dev:
