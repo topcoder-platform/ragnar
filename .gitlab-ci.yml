@@ -5,6 +5,9 @@ variables:
   APP_TITLE: "Lagertha app"
   NODE_ENV: development
 
+services:
+  - mongo
+
 cache:
   paths:
   - node_modules/
