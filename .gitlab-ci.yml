@@ -60,3 +60,4 @@ deploy_stage:
 variables:
   GIT_STRATEGY: fetch
   GIT_SUBMODULE_STRATEGY: recursive
+  MONGODB_URI: mongodb://mongo:27017/ragnar'
