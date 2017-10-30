@@ -6,7 +6,7 @@ const envConfigFile = `
 export const environment = {
   production: true,
   api: {
-    base: '${process.env.BASE_URL}',
+    base: '${process.env.WEBSITE}',
     admin: '/admin/login',
     users: '/admin/users',
     githubOwnerLoginCB: '/github/owneruser/callback',
