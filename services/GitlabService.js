@@ -160,22 +160,23 @@ getGroupRegistrationUrl.schema = Joi.object().keys({
 async function addGroupMember(groupId, ownerUserToken, normalUserToken) {
   try {
     // get normal user id
-    const userId = await request
+    const res = await request
       .get(`${config.GITLAB_API_BASE_URL}/user`)
       .set('Authorization', `Bearer ${normalUserToken}`)
-      .end()
-      .then((res) => res.body.id);
+      .end();
+    const userId = res.body.id;
     if (!userId) {
       throw new errors.UnauthorizedError('Can not get user id from the normal user access token.');
     }
 
     // add user to group
-    return await request
+    await request
       .post(`${config.GITLAB_API_BASE_URL}/groups/${groupId}/members`)
       .set('Authorization', `Bearer ${ownerUserToken}`)
       .send(`user_id=${userId}&access_level=${constants.GITLAB_DEFAULT_GROUP_ACCESS_LEVEL}`)
-      .end()
-      .then((res) => res.body);
+      .end();
+    // return gitlab username
+    return res.body.username;
   } catch (err) {
     if (err instanceof errors.ApiError) {
       throw err;

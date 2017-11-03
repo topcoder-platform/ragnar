@@ -52,6 +52,7 @@ module.exports = {
     get: {
       controller: 'GithubController',
       method: 'addUserToTeam',
+      tcLogin: true,
     },
   },
   '/github/normaluser/callback': {
@@ -90,12 +91,27 @@ module.exports = {
     get: {
       controller: 'GitlabController',
       method: 'addUserToGroup',
+      tcLogin: true,
     },
   },
   '/gitlab/normaluser/callback': {
     get: {
       controller: 'GitlabController',
       method: 'addUserToGroupCallback',
+    },
+  },
+
+  '/tclogin': {
+    post: {
+      controller: 'TCUserController',
+      method: 'login',
+    },
+  },
+  '/admin/tcuser': {
+    get: {
+      controller: 'TCUserController',
+      method: 'getUserMapping',
+      isAdmin: true,
     },
   },
 };
