@@ -15,6 +15,7 @@ const api = supertest(require('../app'));
 const constants = require('../common/constants');
 const Admin = require('../models').Admin;
 const User = require('../models').User;
+const UserMapping = require('../models').UserMapping;
 const OwnerUserTeam = require('../models').OwnerUserTeam;
 const OwnerUserGroup = require('../models').OwnerUserGroup;
 const helper = require('../common/helper');
@@ -36,6 +37,7 @@ describe('Test Admin Functionalities', () => {
     await User.remove();
     await OwnerUserTeam.remove();
     await OwnerUserGroup.remove();
+    await UserMapping.remove();
   });
 
   after(async() => {
@@ -43,6 +45,7 @@ describe('Test Admin Functionalities', () => {
     await User.remove();
     await OwnerUserTeam.remove();
     await OwnerUserGroup.remove();
+    await UserMapping.remove();
   });
 
   it('admin login, missing username, 400 error expected', async() => {

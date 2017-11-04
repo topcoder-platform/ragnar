@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 // app pages
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { TCLoginPageComponent } from './pages/tc-login-page/login-page.component';
 import { UsersPageComponent } from './pages/users-page/users-page.component';
 import { GithubOwnerPageComponent } from './pages/github-owner-page/owner-page.component';
 import { GithubOwnerLoginComponent } from './pages/github-owner-page/owner-login.component';
@@ -24,6 +25,7 @@ import { GitlabMemberAddedPageComponent } from './pages/gitlab-members/member-ad
   declarations: [
     AppComponent,
     LoginPageComponent,
+    TCLoginPageComponent,
     UsersPageComponent,
     GithubOwnerPageComponent,
     GithubOwnerLoginComponent,

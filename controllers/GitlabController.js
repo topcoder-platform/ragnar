@@ -17,6 +17,7 @@ const config = require('../config');
 const GitlabService = require('../services/GitlabService');
 const User = require('../models').User;
 const OwnerUserGroup = require('../models').OwnerUserGroup;
+const UserMapping = require('../models').UserMapping;
 
 const request = superagentPromise(superagent, Promise);
 
@@ -186,7 +187,16 @@ async function addUserToGroupCallback(req, res) {
     .end();
   const token = result.body.access_token;
   // add user to group
-  await GitlabService.addGroupMember(group.groupId, ownerUser.accessToken, token);
+  const gitlabUsername = await GitlabService.addGroupMember(group.groupId, ownerUser.accessToken, token);
+  // associate gitlab username with TC username
+  const topcoderUsername = req.session.tcUsername;
+  const mapping = await UserMapping.findOne({topcoderUsername});
+  if (mapping) {
+    mapping.gitlabUsername = gitlabUsername;
+    await mapping.save();
+  } else {
+    await UserMapping.create({topcoderUsername, gitlabUsername});
+  }
   // redirect to success page
   res.redirect(config.GITLAB_USER_ADDED_TO_GROUP_SUCCESS_URL);
 }

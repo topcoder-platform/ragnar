@@ -33,4 +33,16 @@ module.exports = {
     process.env.GITLAB_OWNER_USER_LOGIN_SUCCESS_URL || '/app/gitlab-owner',
   GITLAB_USER_ADDED_TO_GROUP_SUCCESS_URL:
     process.env.GITLAB_USER_ADDED_TO_GROUP_SUCCESS_URL || '/app/gitlab-members/added',
+
+  TC_LOGIN_URL: process.env.TC_LOGIN_URL || '/app/tclogin',
+  TC_AUTHN_URL: process.env.TC_AUTHN_URL || 'https://topcoder-dev.auth0.com/oauth/ro',
+  TC_AUTHN_REQUEST_BODY: {
+    client_id: process.env.TC_CLIENT_ID || 'JFDo7HMkf0q2CkVFHojy3zHWafziprhT',
+    sso: false,
+    scope: 'openid profile offline_access',
+    response_type: 'token',
+    connection: process.env.TC_CLIENT_V2CONNECTION || 'TC-User-Database',
+    grant_type: 'password',
+    device: 'Browser',
+  },
 };
