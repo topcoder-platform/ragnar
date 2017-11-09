@@ -6,7 +6,7 @@ const envConfigFile = `
 export const environment = {
   production: true,
   api: {
-    base: '${process.env.WEBSITE}',
+    base: '${process.env.WEBSITE}/api/v1',
     admin: '/admin/login',
     tcLogin: '/tclogin',
     users: '/admin/users',
