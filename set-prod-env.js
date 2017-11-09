@@ -8,6 +8,7 @@ export const environment = {
   api: {
     base: '${process.env.WEBSITE}',
     admin: '/admin/login',
+    tcLogin: '/tclogin',
     users: '/admin/users',
     githubOwnerLoginCB: '/github/owneruser/callback',
     githubOwnerLogin: '/github/owneruser/login',

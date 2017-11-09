@@ -1,0 +1,7 @@
+.container {
+	height: 100%;
+}
+
+.login-form {
+	flex: 1 0 auto;
+}
