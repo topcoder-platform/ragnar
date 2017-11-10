@@ -8,6 +8,7 @@ export const environment = {
   api: {
     base: 'https://lagertha-dev.herokuapp.com/api/v1',
     admin: '/admin/login',
+    tcLogin: '/tclogin',
     users: '/admin/users',
     githubOwnerLoginCB: '/github/owneruser/callback',
     githubOwnerLogin: '/github/owneruser/login',

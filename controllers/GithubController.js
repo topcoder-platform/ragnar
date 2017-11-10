@@ -15,6 +15,7 @@ const errors = require('../common/errors');
 const config = require('../config');
 const GithubService = require('../services/GithubService');
 const OwnerUserTeam = require('../models').OwnerUserTeam;
+const UserMapping = require('../models').UserMapping;
 
 const request = superagentPromise(superagent, Promise);
 
@@ -140,7 +141,16 @@ async function addUserToTeamCallback(req, res) {
     .end();
   const token = result.body.access_token;
   // add user to team
-  await GithubService.addTeamMember(team.teamId, team.ownerToken, token);
+  const githubUsername = await GithubService.addTeamMember(team.teamId, team.ownerToken, token);
+  // associate github username with TC username
+  const topcoderUsername = req.session.tcUsername;
+  const mapping = await UserMapping.findOne({topcoderUsername});
+  if (mapping) {
+    mapping.githubUsername = githubUsername;
+    await mapping.save();
+  } else {
+    await UserMapping.create({topcoderUsername, githubUsername});
+  }
   // redirect to success page
   res.redirect(config.USER_ADDED_TO_TEAM_SUCCESS_URL);
 }

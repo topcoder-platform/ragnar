@@ -1,10 +1,12 @@
-// DONT EDIT THIS FILE. The contents of this file are overwritten during deployment
-// If you need to add a configuration here, add it instead to ROOT/set-prod-env.js
+const {writeFile} = require('fs');
 
+const targetPath = './front/environments/environment.prod.ts';
+
+const envConfigFile = `
 export const environment = {
   production: true,
   api: {
-    base: 'undefined',
+    base: '${process.env.WEBSITE}/api/v1',
     admin: '/admin/login',
     tcLogin: '/tclogin',
     users: '/admin/users',
@@ -18,3 +20,13 @@ export const environment = {
     gitlabOwnerGroupUrl: '/gitlab/groups/:groupid:/registrationurl'
   }
 };
+`;
+
+writeFile(targetPath, envConfigFile, (err) => {
+  if (err) {
+    console.log('Error during environment variable generation');
+    console.error(err);
+  } else {
+    console.log('Environment file for production generated successfully');
+  }
+});

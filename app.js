@@ -53,6 +53,17 @@ _.forEach(routes, (verbs, path) => {
         return next();
       });
     }
+    if (def.tcLogin) {
+      // middleware to handle TC login
+      actions.push((req, res, next) => {
+        if (req.session.tcLoginDone) {
+          req.session.tcLoginDone = null;
+          return next();
+        }
+        req.session.tcLoginReturnUrl = req.originalUrl;
+        return res.redirect(config.TC_LOGIN_URL);
+      });
+    }
     actions.push(method);
     app[verb](`/api/${config.API_VERSION}${path}`, actions);
   });
