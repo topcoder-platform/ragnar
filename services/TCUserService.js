@@ -9,7 +9,6 @@
  * @version 1.0
  */
 const Joi = require('joi');
-const _ = require('lodash');
 const superagent = require('superagent');
 const superagentPromise = require('superagent-promise');
 const config = require('../config');
@@ -21,27 +20,22 @@ const request = superagentPromise(superagent, Promise);
 
 
 /**
- * TC user login.
- * @param {Object} body the request body
+ * gets the handle of tc user.
+ * @param {String} token the user token
+ * @returns the handle
  */
-async function login(body) {
-  const result = await request
-    .post(config.TC_AUTHN_URL)
-    .set('cache-control', 'no-cache')
-    .set('content-type', 'application/json')
-    .send(_.assignIn({}, config.TC_AUTHN_REQUEST_BODY, body))
-    .end();
+async function getHandle(token) {
+  const handle = await request
+    .get(config.TC_USER_PROFILE_URL)
+    .set('Authorization', `Bearer ${token}`)
+    .end()
+    .then((res) => res.body.handle);
 
-  if (!result.body.id_token || !result.body.refresh_token) {
-    throw new errors.UnauthorizedError('Login Failed.', 'Failed to do TopCoder V2 authentication.');
-  }
+  return handle;
 }
 
-login.schema = Joi.object().keys({
-  body: Joi.object().keys({
-    username: Joi.string().required(),
-    password: Joi.string().required(),
-  }).required(),
+getHandle.schema = Joi.object().keys({
+  token: Joi.string().required(),
 });
 
 /**
@@ -69,7 +63,7 @@ getUserMapping.schema = Joi.object().keys({
 
 
 module.exports = {
-  login,
+  getHandle,
   getUserMapping,
 };
 

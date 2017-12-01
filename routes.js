@@ -102,7 +102,7 @@ module.exports = {
   },
 
   '/tclogin': {
-    post: {
+    get: {
       controller: 'TCUserController',
       method: 'login',
     },

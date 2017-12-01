@@ -26,14 +26,13 @@ webpackEmptyAsyncContext.id = "../../../../../front/$$_gendir lazy recursive";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_auth_auth_guard__ = __webpack_require__("../../../../../front/app/common/auth/auth-guard.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_login_page_login_page_component__ = __webpack_require__("../../../../../front/app/pages/login-page/login-page.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_tc_login_page_login_page_component__ = __webpack_require__("../../../../../front/app/pages/tc-login-page/login-page.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_users_page_users_page_component__ = __webpack_require__("../../../../../front/app/pages/users-page/users-page.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_github_owner_page_owner_page_component__ = __webpack_require__("../../../../../front/app/pages/github-owner-page/owner-page.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_github_owner_page_owner_login_component__ = __webpack_require__("../../../../../front/app/pages/github-owner-page/owner-login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_github_members_member_added_page_component__ = __webpack_require__("../../../../../front/app/pages/github-members/member-added-page.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_gitlab_owner_page_owner_page_component__ = __webpack_require__("../../../../../front/app/pages/gitlab-owner-page/owner-page.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_gitlab_owner_page_owner_login_component__ = __webpack_require__("../../../../../front/app/pages/gitlab-owner-page/owner-login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_gitlab_members_member_added_page_component__ = __webpack_require__("../../../../../front/app/pages/gitlab-members/member-added-page.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_users_page_users_page_component__ = __webpack_require__("../../../../../front/app/pages/users-page/users-page.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_github_owner_page_owner_page_component__ = __webpack_require__("../../../../../front/app/pages/github-owner-page/owner-page.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_github_owner_page_owner_login_component__ = __webpack_require__("../../../../../front/app/pages/github-owner-page/owner-login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_github_members_member_added_page_component__ = __webpack_require__("../../../../../front/app/pages/github-members/member-added-page.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_gitlab_owner_page_owner_page_component__ = __webpack_require__("../../../../../front/app/pages/gitlab-owner-page/owner-page.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_gitlab_owner_page_owner_login_component__ = __webpack_require__("../../../../../front/app/pages/gitlab-owner-page/owner-login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_gitlab_members_member_added_page_component__ = __webpack_require__("../../../../../front/app/pages/gitlab-members/member-added-page.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -51,17 +50,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
 var routes = [
     { path: 'login', component: __WEBPACK_IMPORTED_MODULE_3__pages_login_page_login_page_component__["a" /* LoginPageComponent */] },
-    { path: 'tclogin', component: __WEBPACK_IMPORTED_MODULE_4__pages_tc_login_page_login_page_component__["a" /* TCLoginPageComponent */] },
-    { path: 'users', component: __WEBPACK_IMPORTED_MODULE_5__pages_users_page_users_page_component__["a" /* UsersPageComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_2__common_auth_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'github-owner-login', component: __WEBPACK_IMPORTED_MODULE_7__pages_github_owner_page_owner_login_component__["a" /* GithubOwnerLoginComponent */] },
-    { path: 'github-owner', component: __WEBPACK_IMPORTED_MODULE_6__pages_github_owner_page_owner_page_component__["a" /* GithubOwnerPageComponent */] },
-    { path: 'github-members/added', component: __WEBPACK_IMPORTED_MODULE_8__pages_github_members_member_added_page_component__["a" /* GithubMemberAddedPageComponent */] },
-    { path: 'gitlab-owner-login', component: __WEBPACK_IMPORTED_MODULE_10__pages_gitlab_owner_page_owner_login_component__["a" /* GitlabOwnerLoginComponent */] },
-    { path: 'gitlab-owner', component: __WEBPACK_IMPORTED_MODULE_9__pages_gitlab_owner_page_owner_page_component__["a" /* GitlabOwnerPageComponent */] },
-    { path: 'gitlab-members/added', component: __WEBPACK_IMPORTED_MODULE_11__pages_gitlab_members_member_added_page_component__["a" /* GitlabMemberAddedPageComponent */] },
+    { path: 'users', component: __WEBPACK_IMPORTED_MODULE_4__pages_users_page_users_page_component__["a" /* UsersPageComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_2__common_auth_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'github-owner-login', component: __WEBPACK_IMPORTED_MODULE_6__pages_github_owner_page_owner_login_component__["a" /* GithubOwnerLoginComponent */] },
+    { path: 'github-owner', component: __WEBPACK_IMPORTED_MODULE_5__pages_github_owner_page_owner_page_component__["a" /* GithubOwnerPageComponent */] },
+    { path: 'github-members/added', component: __WEBPACK_IMPORTED_MODULE_7__pages_github_members_member_added_page_component__["a" /* GithubMemberAddedPageComponent */] },
+    { path: 'gitlab-owner-login', component: __WEBPACK_IMPORTED_MODULE_9__pages_gitlab_owner_page_owner_login_component__["a" /* GitlabOwnerLoginComponent */] },
+    { path: 'gitlab-owner', component: __WEBPACK_IMPORTED_MODULE_8__pages_gitlab_owner_page_owner_page_component__["a" /* GitlabOwnerPageComponent */] },
+    { path: 'gitlab-members/added', component: __WEBPACK_IMPORTED_MODULE_10__pages_gitlab_members_member_added_page_component__["a" /* GitlabMemberAddedPageComponent */] },
     { path: '**', redirectTo: '/login' } // Page not found, redirect to login
 ];
 var AppRoutingModule = (function () {
@@ -123,14 +120,13 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("../../../../../front/app/app.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_routing_module__ = __webpack_require__("../../../../../front/app/app-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_login_page_login_page_component__ = __webpack_require__("../../../../../front/app/pages/login-page/login-page.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_tc_login_page_login_page_component__ = __webpack_require__("../../../../../front/app/pages/tc-login-page/login-page.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_users_page_users_page_component__ = __webpack_require__("../../../../../front/app/pages/users-page/users-page.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_github_owner_page_owner_page_component__ = __webpack_require__("../../../../../front/app/pages/github-owner-page/owner-page.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_github_owner_page_owner_login_component__ = __webpack_require__("../../../../../front/app/pages/github-owner-page/owner-login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_github_members_member_added_page_component__ = __webpack_require__("../../../../../front/app/pages/github-members/member-added-page.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_gitlab_owner_page_owner_page_component__ = __webpack_require__("../../../../../front/app/pages/gitlab-owner-page/owner-page.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_gitlab_owner_page_owner_login_component__ = __webpack_require__("../../../../../front/app/pages/gitlab-owner-page/owner-login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_gitlab_members_member_added_page_component__ = __webpack_require__("../../../../../front/app/pages/gitlab-members/member-added-page.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_users_page_users_page_component__ = __webpack_require__("../../../../../front/app/pages/users-page/users-page.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_github_owner_page_owner_page_component__ = __webpack_require__("../../../../../front/app/pages/github-owner-page/owner-page.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_github_owner_page_owner_login_component__ = __webpack_require__("../../../../../front/app/pages/github-owner-page/owner-login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_github_members_member_added_page_component__ = __webpack_require__("../../../../../front/app/pages/github-members/member-added-page.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_gitlab_owner_page_owner_page_component__ = __webpack_require__("../../../../../front/app/pages/gitlab-owner-page/owner-page.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_gitlab_owner_page_owner_login_component__ = __webpack_require__("../../../../../front/app/pages/gitlab-owner-page/owner-login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_gitlab_members_member_added_page_component__ = __webpack_require__("../../../../../front/app/pages/gitlab-members/member-added-page.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -155,7 +151,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
 var AppModule = (function () {
     function AppModule() {
     }
@@ -166,14 +161,13 @@ AppModule = __decorate([
         declarations: [
             __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_7__pages_login_page_login_page_component__["a" /* LoginPageComponent */],
-            __WEBPACK_IMPORTED_MODULE_8__pages_tc_login_page_login_page_component__["a" /* TCLoginPageComponent */],
-            __WEBPACK_IMPORTED_MODULE_9__pages_users_page_users_page_component__["a" /* UsersPageComponent */],
-            __WEBPACK_IMPORTED_MODULE_10__pages_github_owner_page_owner_page_component__["a" /* GithubOwnerPageComponent */],
-            __WEBPACK_IMPORTED_MODULE_11__pages_github_owner_page_owner_login_component__["a" /* GithubOwnerLoginComponent */],
-            __WEBPACK_IMPORTED_MODULE_12__pages_github_members_member_added_page_component__["a" /* GithubMemberAddedPageComponent */],
-            __WEBPACK_IMPORTED_MODULE_13__pages_gitlab_owner_page_owner_page_component__["a" /* GitlabOwnerPageComponent */],
-            __WEBPACK_IMPORTED_MODULE_14__pages_gitlab_owner_page_owner_login_component__["a" /* GitlabOwnerLoginComponent */],
-            __WEBPACK_IMPORTED_MODULE_15__pages_gitlab_members_member_added_page_component__["a" /* GitlabMemberAddedPageComponent */],
+            __WEBPACK_IMPORTED_MODULE_8__pages_users_page_users_page_component__["a" /* UsersPageComponent */],
+            __WEBPACK_IMPORTED_MODULE_9__pages_github_owner_page_owner_page_component__["a" /* GithubOwnerPageComponent */],
+            __WEBPACK_IMPORTED_MODULE_10__pages_github_owner_page_owner_login_component__["a" /* GithubOwnerLoginComponent */],
+            __WEBPACK_IMPORTED_MODULE_11__pages_github_members_member_added_page_component__["a" /* GithubMemberAddedPageComponent */],
+            __WEBPACK_IMPORTED_MODULE_12__pages_gitlab_owner_page_owner_page_component__["a" /* GitlabOwnerPageComponent */],
+            __WEBPACK_IMPORTED_MODULE_13__pages_gitlab_owner_page_owner_login_component__["a" /* GitlabOwnerLoginComponent */],
+            __WEBPACK_IMPORTED_MODULE_14__pages_gitlab_members_member_added_page_component__["a" /* GitlabMemberAddedPageComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -321,15 +315,6 @@ var Auth = (function () {
             .map(function (res) { return res.json(); })
             .map(function (data) { return (_this.setToken(data.token), { success: true }); });
     };
-    /**
-     * TC login
-     * @param {string} username
-     * @param {string} password
-     */
-    Auth.prototype.tcLogin = function (username, password) {
-        return this.http.post(Object(__WEBPACK_IMPORTED_MODULE_5_app_common_api_urls__["a" /* apiUrl */])('tcLogin'), { username: username, password: password })
-            .map(function (res) { return res.json(); });
-    };
     return Auth;
 }());
 Auth = __decorate([
@@ -404,7 +389,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".container {\n  padding-top: 30px;\n}\n", ""]);
+exports.push([module.i, ".container {\r\n  padding-top: 30px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -417,7 +402,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../front/app/pages/github-members/member-added-page.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"jumbotron\">\n    <h3>You were successfully added to the team!</h3>\n    <p>An invitation email will be sent to you if you are not already in the team.</p>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\r\n  <div class=\"jumbotron\">\r\n    <h3>You were successfully added to the team!</h3>\r\n    <p>An invitation email will be sent to you if you are not already in the team.</p>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -549,7 +534,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ":host {\n  padding-top: 30px;\n  display: block;\n}\n\n.page {\n  width: 80px;\n}\n", ""]);
+exports.push([module.i, ":host {\r\n  padding-top: 30px;\r\n  display: block;\r\n}\r\n\r\n.page {\r\n  width: 80px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -562,7 +547,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../front/app/pages/github-owner-page/owner-page.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"state.ready\">\n  <h3>Your managed teams</h3>\n  <p><small>(Select a team to see the registration url )</small></p>\n  <!-- show error message -->\n  <p class=\"form-error\">{{errorMsg}}</p>\n  <div class=\"list-group\">\n    <!-- list all teams and the register url -->\n    <ng-container *ngFor=\"let t of state.teams; let $i=index\">\n      <a href=\"javascript:;\" (click)=\"getSharableLink(t)\" class=\"list-group-item list-group-item-action\">{{$i+1}}. {{t.name}}</a>\n      <div class=\"list-group-item disabled\" *ngIf=\"state.team===t.id&&state.links[state.team]\">\n        Team url for <strong>{{t.name}}</strong> is: <code>{{state.links[state.team]}}</code>\n      </div>\n    </ng-container>\n  </div>\n  <br/>\n  <div class=\"form-group\">\n    Page:\n    <select class=\"form-control page\" id=\"page\" name=\"page\" [(ngModel)]=\"state.page\" (change)=\"changePage()\">\n      <option *ngFor=\"let p of getPages()\">{{p}}</option>\n    </select>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\" *ngIf=\"state.ready\">\r\n  <h3>Your managed teams</h3>\r\n  <p><small>(Select a team to see the registration url )</small></p>\r\n  <!-- show error message -->\r\n  <p class=\"form-error\">{{errorMsg}}</p>\r\n  <div class=\"list-group\">\r\n    <!-- list all teams and the register url -->\r\n    <ng-container *ngFor=\"let t of state.teams; let $i=index\">\r\n      <a href=\"javascript:;\" (click)=\"getSharableLink(t)\" class=\"list-group-item list-group-item-action\">{{$i+1}}. {{t.name}}</a>\r\n      <div class=\"list-group-item disabled\" *ngIf=\"state.team===t.id&&state.links[state.team]\">\r\n        Team url for <strong>{{t.name}}</strong> is: <code>{{state.links[state.team]}}</code>\r\n      </div>\r\n    </ng-container>\r\n  </div>\r\n  <br/>\r\n  <div class=\"form-group\">\r\n    Page:\r\n    <select class=\"form-control page\" id=\"page\" name=\"page\" [(ngModel)]=\"state.page\" (change)=\"changePage()\">\r\n      <option *ngFor=\"let p of getPages()\">{{p}}</option>\r\n    </select>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -689,7 +674,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".container {\n  padding-top: 30px;\n}\n", ""]);
+exports.push([module.i, ".container {\r\n  padding-top: 30px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -702,7 +687,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../front/app/pages/gitlab-members/member-added-page.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"jumbotron\">\n    <h3>You were successfully added to the group!</h3>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\r\n  <div class=\"jumbotron\">\r\n    <h3>You were successfully added to the group!</h3>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -837,7 +822,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ":host {\n  padding-top: 30px;\n  display: block;\n}\n\n.page {\n  width: 80px;\n}\n", ""]);
+exports.push([module.i, ":host {\r\n  padding-top: 30px;\r\n  display: block;\r\n}\r\n\r\n.page {\r\n  width: 80px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -850,7 +835,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../front/app/pages/gitlab-owner-page/owner-page.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"state.ready\">\n  <h3>Your managed groups</h3>\n  <p><small>(Select a group to see the registration url )</small></p>\n  <div class=\"list-group\">\n    <!-- list all groups and the register url -->\n    <ng-container *ngFor=\"let g of state.groups; let $i=index\">\n      <a href=\"javascript:;\" (click)=\"getSharableLink(g)\" class=\"list-group-item list-group-item-action\">{{$i+1}}. {{g.name}}</a>\n      <div class=\"list-group-item disabled\" *ngIf=\"state.group===g.id&&state.links[state.group]\">\n        Group url for <strong>{{g.name}}</strong> is: <code>{{state.links[state.group]}}</code>\n      </div>\n    </ng-container>\n  </div>\n  <br/>\n  <div class=\"form-group\">\n    Page:\n    <select class=\"form-control page\" id=\"page\" name=\"page\" [(ngModel)]=\"state.page\" (change)=\"changePage()\">\n      <option *ngFor=\"let p of getPages()\">{{p}}</option>\n    </select>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\" *ngIf=\"state.ready\">\r\n  <h3>Your managed groups</h3>\r\n  <p><small>(Select a group to see the registration url )</small></p>\r\n  <div class=\"list-group\">\r\n    <!-- list all groups and the register url -->\r\n    <ng-container *ngFor=\"let g of state.groups; let $i=index\">\r\n      <a href=\"javascript:;\" (click)=\"getSharableLink(g)\" class=\"list-group-item list-group-item-action\">{{$i+1}}. {{g.name}}</a>\r\n      <div class=\"list-group-item disabled\" *ngIf=\"state.group===g.id&&state.links[state.group]\">\r\n        Group url for <strong>{{g.name}}</strong> is: <code>{{state.links[state.group]}}</code>\r\n      </div>\r\n    </ng-container>\r\n  </div>\r\n  <br/>\r\n  <div class=\"form-group\">\r\n    Page:\r\n    <select class=\"form-control page\" id=\"page\" name=\"page\" [(ngModel)]=\"state.page\" (change)=\"changePage()\">\r\n      <option *ngFor=\"let p of getPages()\">{{p}}</option>\r\n    </select>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -969,7 +954,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".container {\n\theight: 100%;\n}\n\n.login-form {\n\t-webkit-box-flex: 1;\n\t    -ms-flex: 1 0 auto;\n\t        flex: 1 0 auto;\n}", ""]);
+exports.push([module.i, ".container {\r\n\theight: 100%;\r\n}\r\n\r\n.login-form {\r\n\t-webkit-box-flex: 1;\r\n\t    -ms-flex: 1 0 auto;\r\n\t        flex: 1 0 auto;\r\n}", ""]);
 
 // exports
 
@@ -982,7 +967,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../front/app/pages/login-page/login-page.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container d-flex align-items-center\">\n  <form class=\"login-form\">\n    <!-- show login error -->\n    <div class=\"form-error\">{{loginError||'&nbsp;'}}</div>\n    <div class=\"form-group\">\n      <label for=\"usernameInput\">Username</label>\n      <input type=\"text\" class=\"form-control\" id=\"usernameInput\" placeholder=\"Username\" name=\"username\" [(ngModel)]=\"user.username\" (keydown)=\"clear()\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"passwordInput\">Password</label>\n      <input type=\"password\" class=\"form-control\" id=\"passwordInput\" placeholder=\"Password\" name=\"password\" [(ngModel)]=\"user.password\" (keydown)=\"clear()\">\n    </div>\n    <button class=\"btn btn-primary\" (click)=\"login(user.username, user.password)\">Login</button>\n    <br/><br/>\n    <button class=\"btn btn-primary\" (click)=\"loginGithub()\">Login using Github</button>\n    <br/><br/>\n    <button class=\"btn btn-primary\" (click)=\"loginGitlab()\">Login using Gitlab</button>\n  </form>\n</div>\n"
+module.exports = "<div class=\"container d-flex align-items-center\">\r\n  <form class=\"login-form\">\r\n    <!-- show login error -->\r\n    <div class=\"form-error\">{{loginError||'&nbsp;'}}</div>\r\n    <div class=\"form-group\">\r\n      <label for=\"usernameInput\">Username</label>\r\n      <input type=\"text\" class=\"form-control\" id=\"usernameInput\" placeholder=\"Username\" name=\"username\" [(ngModel)]=\"user.username\" (keydown)=\"clear()\">\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label for=\"passwordInput\">Password</label>\r\n      <input type=\"password\" class=\"form-control\" id=\"passwordInput\" placeholder=\"Password\" name=\"password\" [(ngModel)]=\"user.password\" (keydown)=\"clear()\">\r\n    </div>\r\n    <button class=\"btn btn-primary\" (click)=\"login(user.username, user.password)\">Login</button>\r\n    <br/><br/>\r\n    <button class=\"btn btn-primary\" (click)=\"loginGithub()\">Login using Github</button>\r\n    <br/><br/>\r\n    <button class=\"btn btn-primary\" (click)=\"loginGitlab()\">Login using Gitlab</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1074,103 +1059,6 @@ var _a, _b;
 
 /***/ }),
 
-/***/ "../../../../../front/app/pages/tc-login-page/login-page.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".container {\n\theight: 100%;\n}\n\n.login-form {\n\t-webkit-box-flex: 1;\n\t    -ms-flex: 1 0 auto;\n\t        flex: 1 0 auto;\n}", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../front/app/pages/tc-login-page/login-page.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"container d-flex align-items-center\">\n  <form class=\"login-form\">\n    <h3>TopCoder Login</h3>\n    <!-- show login error -->\n    <div class=\"form-error\">{{loginError||'&nbsp;'}}</div>\n    <div class=\"form-group\">\n      <label for=\"usernameInput\">Username</label>\n      <input type=\"text\" class=\"form-control\" id=\"usernameInput\" placeholder=\"Username\" name=\"username\" [(ngModel)]=\"user.username\" (keydown)=\"clear()\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"passwordInput\">Password</label>\n      <input type=\"password\" class=\"form-control\" id=\"passwordInput\" placeholder=\"Password\" name=\"password\" [(ngModel)]=\"user.password\" (keydown)=\"clear()\">\n    </div>\n    <button class=\"btn btn-primary\" (click)=\"login(user.username, user.password)\">Login</button>\n  </form>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../front/app/pages/tc-login-page/login-page.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TCLoginPageComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_common_auth_auth_service__ = __webpack_require__("../../../../../front/app/common/auth/auth-service.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var TCLoginPageComponent = (function () {
-    function TCLoginPageComponent(auth, router) {
-        this.auth = auth;
-        this.router = router;
-        this.user = {};
-        this.loginError = '';
-    }
-    /**
-     * login
-     * @param {string} username User username
-     * @param {string} password User password
-     */
-    TCLoginPageComponent.prototype.login = function (username, password) {
-        var _this = this;
-        this.clear();
-        if (!username || username.length === 0) {
-            this.loginError = 'Missing user name.';
-            return;
-        }
-        if (!password || password.length === 0) {
-            this.loginError = 'Missing password.';
-            return;
-        }
-        this.auth.tcLogin(username, password)
-            .subscribe(function (data) {
-            window.location.href = data.returnUrl;
-        }, function (r) {
-            _this.loginError = 'Invalid username and/or password!';
-        });
-    };
-    /**
-     * clear Clear login errors
-     */
-    TCLoginPageComponent.prototype.clear = function () {
-        this.loginError = '';
-    };
-    return TCLoginPageComponent;
-}());
-TCLoginPageComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
-        selector: 'app-tc-login-page',
-        template: __webpack_require__("../../../../../front/app/pages/tc-login-page/login-page.component.html"),
-        styles: [__webpack_require__("../../../../../front/app/pages/tc-login-page/login-page.component.css")]
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_app_common_auth_auth_service__["a" /* Auth */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_app_common_auth_auth_service__["a" /* Auth */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* Router */]) === "function" && _b || Object])
-], TCLoginPageComponent);
-
-var _a, _b;
-//# sourceMappingURL=login-page.component.js.map
-
-/***/ }),
-
 /***/ "../../../../../front/app/pages/users-page/users-page.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1179,7 +1067,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".container {\n    height: 100%;\n}\n\n.users-form {\n    -webkit-box-flex: 1;\n        -ms-flex: 1 0 auto;\n            flex: 1 0 auto;\n}\n", ""]);
+exports.push([module.i, ".container {\r\n    height: 100%;\r\n}\r\n\r\n.users-form {\r\n    -webkit-box-flex: 1;\r\n        -ms-flex: 1 0 auto;\r\n            flex: 1 0 auto;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1192,7 +1080,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../front/app/pages/users-page/users-page.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container d-flex align-items-center\">\n  <form class=\"users-form\" (ngSubmit)=\"addUser(user.username, user.type)\">\n    <h3>Add owner</h3>\n    <!-- Add owner notification message -->\n    <div class=\"form-success\">{{userAdded? 'User added!' : '&nbsp;'}}</div>\n    <!-- error message -->\n    <div class=\"form-error\">{{msg}}</div>\n    <!-- Add owner form -->\n    <div class=\"form-group\">\n      Username:\n      <input type=\"text\" class=\"form-control\" id=\"usernameInput\" placeholder=\"Username\" name=\"username\" [(ngModel)]=\"user.username\" (keydown)=\"clear()\">\n      <br/>\n      Type:\n      <select class=\"form-control\" id=\"userTypeInput\" name=\"type\" [(ngModel)]=\"user.type\" value=\"github\">\n        <option>github</option>\n        <option>gitlab</option>\n      </select>\n    </div>\n    <button type=\"submit\" class=\"btn btn-primary\">Add</button>\n  </form>\n</div>\n"
+module.exports = "<div class=\"container d-flex align-items-center\">\r\n  <form class=\"users-form\" (ngSubmit)=\"addUser(user.username, user.type)\">\r\n    <h3>Add owner</h3>\r\n    <!-- Add owner notification message -->\r\n    <div class=\"form-success\">{{userAdded? 'User added!' : '&nbsp;'}}</div>\r\n    <!-- error message -->\r\n    <div class=\"form-error\">{{msg}}</div>\r\n    <!-- Add owner form -->\r\n    <div class=\"form-group\">\r\n      Username:\r\n      <input type=\"text\" class=\"form-control\" id=\"usernameInput\" placeholder=\"Username\" name=\"username\" [(ngModel)]=\"user.username\" (keydown)=\"clear()\">\r\n      <br/>\r\n      Type:\r\n      <select class=\"form-control\" id=\"userTypeInput\" name=\"type\" [(ngModel)]=\"user.type\" value=\"github\">\r\n        <option>github</option>\r\n        <option>gitlab</option>\r\n      </select>\r\n    </div>\r\n    <button type=\"submit\" class=\"btn btn-primary\">Add</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1285,7 +1173,7 @@ var _a;
 var environment = {
     production: false,
     api: {
-        base: 'http://localhost:3000/api/v1',
+        base: 'http://localhost/api/v1',
         admin: '/admin/login',
         tcLogin: '/tclogin',
         users: '/admin/users',
