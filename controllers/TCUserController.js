@@ -15,7 +15,7 @@ const TCUserService = require('../services/TCUserService');
 /**
  * TC user login.
  * @param {Object} req the request
- * @returns {Object} the login result
+ * @param {Object} res the response
  */
 async function login(req, res) {
   const cookies = req.cookies;
@@ -24,9 +24,11 @@ async function login(req, res) {
     // login success
     req.session.tcLoginDone = true;
     req.session.tcUsername = handle;
-    return res.redirect(req.session.tcLoginReturnUrl);
+
+    res.redirect(req.session.tcLoginReturnUrl);
+  } else {
+    res.redirect(config.TC_LOGIN_URL);
   }
-  return res.redirect(config.TC_LOGIN_URL);
 }
 
 /**

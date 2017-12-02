@@ -22,7 +22,7 @@ const request = superagentPromise(superagent, Promise);
 /**
  * gets the handle of tc user.
  * @param {String} token the user token
- * @returns the handle
+ * @returns {String} the handle
  */
 async function getHandle(token) {
   const handle = await request
