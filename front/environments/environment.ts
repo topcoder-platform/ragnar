@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   api: {
-    base: 'http://localhost:3000/api/v1',
+    base: 'http://localhost/api/v1',
     admin: '/admin/login',
     tcLogin: '/tclogin',
     users: '/admin/users',

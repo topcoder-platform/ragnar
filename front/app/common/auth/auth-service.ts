@@ -42,14 +42,4 @@ export class Auth {
       .map((res: Response) => res.json())
       .map((data) => (this.setToken(data.token), {success: true}));
   }
-
-  /**
-   * TC login
-   * @param {string} username
-   * @param {string} password
-   */
-  tcLogin(username: string, password: string) {
-    return this.http.post(apiUrl('tcLogin'), {username, password})
-      .map((res: Response) => res.json());
-  }
 }
