@@ -27,7 +27,8 @@ async function login(req, res) {
 
     res.redirect(req.session.tcLoginReturnUrl);
   } else {
-    res.redirect(config.TC_LOGIN_URL);
+    const callbackUri = `${config.WEBSITE}${config.TC_LOGIN_CALLBACK_URL}`;
+    res.redirect(`${config.TC_LOGIN_URL}?retUrl=${encodeURIComponent(callbackUri)}`);
   }
 }
 
