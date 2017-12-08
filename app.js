@@ -63,7 +63,8 @@ _.forEach(routes, (verbs, path) => {
           return next();
         }
         req.session.tcLoginReturnUrl = req.originalUrl;
-        return res.redirect(config.TC_LOGIN_URL);
+        const callbackUri = `${config.WEBSITE}${config.TC_LOGIN_CALLBACK_URL}`;
+        return res.redirect(`${config.TC_LOGIN_URL}?retUrl=${encodeURIComponent(callbackUri)}`);
       });
     }
     actions.push(method);
