@@ -69,7 +69,8 @@ The following config parameters are supported, they are defined in `config.js` a
 | GITLAB_OWNER_CALLBACK_URL              | URL to handle gitlab login callback        | /app/gitlab-owner-login          |
 | GITLAB_OWNER_USER_LOGIN_SUCCESS_URL    | URL to show owner user login success       | /app/gitlab-owner                |
 | GITLAB_USER_ADDED_TO_GROUP_SUCCESS_URL | URL to show success of adding user to group| /app/gitlab-members/added        |
-| TC_LOGIN_URL                           | URL to do TopCoder login in the front end with return url to get the handle  | /app/tclogin                     |
+| TC_LOGIN_URL                           | URL to do TopCoder login |                      |
+| TC_LOGIN_CALLBACK_URL | URL to handle Topcoder login callback||
 | TC_USER_PROFILE_URL                    | URL to to call TopCoder API to get profile from token    | https://accounts.topcoder.com/member?retUrl=http:%2F%2Fragnarlocal.topcoder.com%2Fapi%2Fv1%2Ftclogin |
 
 
