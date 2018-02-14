@@ -15,6 +15,7 @@ const express = require('express');
 const expressJwt = require('express-jwt');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const config = require('./config');
 const routes = require('./routes');
 const logger = require('./common/logger');
@@ -25,6 +26,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({secret: config.SESSION_SECRET, resave: false, saveUninitialized: true}));
+app.use(cookieParser());
 
 // static content
 app.use(express.static(Path.join(__dirname, 'public')));
@@ -61,7 +63,8 @@ _.forEach(routes, (verbs, path) => {
           return next();
         }
         req.session.tcLoginReturnUrl = req.originalUrl;
-        return res.redirect(config.TC_LOGIN_URL);
+        const callbackUri = `${config.WEBSITE}${config.TC_LOGIN_CALLBACK_URL}`;
+        return res.redirect(`${config.TC_LOGIN_URL}?retUrl=${encodeURIComponent(callbackUri)}`);
       });
     }
     actions.push(method);

@@ -8,20 +8,28 @@
  * @author TCSCODER
  * @version 1.0
  */
+const config = require('../config');
 const helper = require('../common/helper');
 const TCUserService = require('../services/TCUserService');
 
 /**
  * TC user login.
  * @param {Object} req the request
- * @returns {Object} the login result
+ * @param {Object} res the response
  */
-async function login(req) {
-  await TCUserService.login(req.body);
-  // login success
-  req.session.tcLoginDone = true;
-  req.session.tcUsername = req.body.username;
-  return {returnUrl: req.session.tcLoginReturnUrl};
+async function login(req, res) {
+  const cookies = req.cookies;
+  if (cookies && cookies.tcjwt) {
+    const handle = await TCUserService.getHandle(cookies.tcjwt);
+    // login success
+    req.session.tcLoginDone = true;
+    req.session.tcUsername = handle;
+
+    res.redirect(req.session.tcLoginReturnUrl);
+  } else {
+    const callbackUri = `${config.WEBSITE}${config.TC_LOGIN_CALLBACK_URL}`;
+    res.redirect(`${config.TC_LOGIN_URL}?retUrl=${encodeURIComponent(callbackUri)}`);
+  }
 }
 
 /**

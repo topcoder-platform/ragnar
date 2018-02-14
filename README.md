@@ -36,18 +36,20 @@ npm run lint
 - GET /gitlab/groups/registration/:identifier - normal user registers a group via this API, it will do GitLab OAuth
 - GET /gitlab/normaluser/callback - normal user GitLab OAuth callback
 
-- POST /tclogin - TopCoder login
+- GET /tclogin - TopCoder login
 - GET /admin/tcuser - get TopCoder/GitLab/GitHub user mapping
 
 
 ## Configuration
+
+Map the localhost to ragnarlocal.topcoder.com by editing `hosts` file.
 
 The following config parameters are supported, they are defined in `config.js` and can be configured in system environment:
 
 
 | Name                                   | Description                                | Default                          |
 | :------------------------------------- | :----------------------------------------: | :------------------------------: |
-| PORT                                   | the port the application will listen on    |  3000                            |
+| PORT                                   | the port the application will listen on    |  80                              |
 | API_VERSION                            | the API version                            |   v1                             |
 | LOG_LEVEL                              | the log level                              |  info                            |
 | MONGODB_URI                            | the MongoDB URI                            | mongodb://localhost:27017/ragnar |
@@ -57,7 +59,7 @@ The following config parameters are supported, they are defined in `config.js` a
 | JWT_EXPIRATION                         | a string of time span                      | 2 days                           |
 | GITHUB_CLIENT_ID                       | the GitHub client id                       |                                  |
 | GITHUB_CLIENT_SECRET                   | the GitHub client secret                   |                                  |
-| WEBSITE                                | used as base to construct various URLs     | http://localhost:3000            |
+| WEBSITE                                | used as base to construct various URLs     | http://ragnarlocal.topcoder.com/ |
 | GITHUB_OWNER_CALLBACK_URL              | URL to handle github login callback        | /app/github-owner-login          |
 | OWNER_USER_LOGIN_SUCCESS_URL           | URL to show owner user login success       | /app/github-owner                |
 | USER_ADDED_TO_TEAM_SUCCESS_URL         | URL to show success of adding user to team | /app/github-members/added        |
@@ -67,10 +69,9 @@ The following config parameters are supported, they are defined in `config.js` a
 | GITLAB_OWNER_CALLBACK_URL              | URL to handle gitlab login callback        | /app/gitlab-owner-login          |
 | GITLAB_OWNER_USER_LOGIN_SUCCESS_URL    | URL to show owner user login success       | /app/gitlab-owner                |
 | GITLAB_USER_ADDED_TO_GROUP_SUCCESS_URL | URL to show success of adding user to group| /app/gitlab-members/added        |
-| TC_LOGIN_URL                           | URL to do TopCoder login in the front end  | /app/tclogin                     |
-| TC_AUTHN_URL                           | URL to to call TopCoder API to do login    | https://topcoder-dev.auth0.com/oauth/ro |
-| TC_CLIENT_ID                           | TC client id for TC login                  |                                  |
-| TC_CLIENT_V2CONNECTION                 | TC client V2 connection URL used for login | TC-User-Database                 |
+| TC_LOGIN_URL                           | URL to do TopCoder login |                      |
+| TC_LOGIN_CALLBACK_URL | URL to handle Topcoder login callback||
+| TC_USER_PROFILE_URL                    | URL to to call TopCoder API to get profile from token    | https://accounts.topcoder.com/member?retUrl=http:%2F%2Fragnarlocal.topcoder.com%2Fapi%2Fv1%2Ftclogin |
 
 
 Normally you just need config the GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITLAB_CLIENT_ID and GITLAB_CLIENT_SECRET:
@@ -99,7 +100,7 @@ set GITLAB_CLIENT_SECRET=...
 - click the left pannel --> Developer settings --> OAuth Apps
 - click the `Register a new application`, fill in the fields,
   note that the `Authorization callback URL` should be the deployed web site,
-  for local deployment, it should be `http://localhost:3000`
+  for local deployment, it should be `http://localhost:80`
 - after creating the OAuth app, you can see its client id and client secret,
   these should be set to GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET environment variables
 
@@ -111,8 +112,8 @@ set GITLAB_CLIENT_SECRET=...
 - click the `Applications` tab
 - enter application name, e.g. `Ragnar-tool`
 - for Redirect URI, enter two callback URLs, one callback URL per line, so there are two lines:
-  http://localhost:3000/app/gitlab-owner-login
-  http://localhost:3000/api/v1/gitlab/normaluser/callback
+  http://localhost:80/app/gitlab-owner-login
+  http://localhost:80/api/v1/gitlab/normaluser/callback
 - for Scopes, check the `api` and `read_user`, the `api` is for owner user, the `read_user` is for normal user
 - finnally click `Save application` to save the OAuth app, then you will see its generated Application Id and Secret,
   these should be set to GITLAB_CLIENT_ID and GITLAB_CLIENT_SECRET environment variables
@@ -147,7 +148,7 @@ It will clear all data, and create an admin with credential `admin` / `password`
 npm start
 ```
 
-Server should be started at port 3000.
+Server should be started at port 80.
 
 
 ## Postman
@@ -167,17 +168,17 @@ For the `Get User Mapping` test, you may quety mapping by providing either topco
 - in Postman, call `Admin Login`, then call `Save GitHub User` with your GitHub username,
   this will create an owner user of your GitHub username
 - login into github.com, create some test teams
-- use browser to browse `http://localhost:3000/api/v1/github/owneruser/login`, GitHub OAuth will start,
+- use browser to browse `http://localhost:80/api/v1/github/owneruser/login`, GitHub OAuth will start,
   then you should grant permissions to the app to manage your organizations/teams,
   if successful, you will finallly see a success page
 - after the owner user login, credential data are stored in session, you may use this browser session
   to do some owner user operations
-- browse `http://localhost:3000/api/v1/github/owneruser/teams` to view current owner user's teams,
-  pagination is supported, e.g. browse `http://localhost:3000/api/v1/github/owneruser/teams?page=1&perPage=10`
+- browse `http://localhost:80/api/v1/github/owneruser/teams` to view current owner user's teams,
+  pagination is supported, e.g. browse `http://localhost:80/api/v1/github/owneruser/teams?page=1&perPage=10`
 - during browsing teams, choose a team to allow user registration, extract its team id, which is used below
-- browse `http://localhost:3000/api/v1/github/teams/{above-selected-team-id}/registrationurl`,
+- browse `http://localhost:80/api/v1/github/teams/{above-selected-team-id}/registrationurl`,
   replacing {above-selected-team-id} with your selected team id, it will response with content like below:
-  {"url":"http://localhost:3000/api/v1/github/teams/registration/33a83455-0a22-4221-82c3-bcc66f362a37-1504274541624"}
+  {"url":"http://localhost:80/api/v1/github/teams/registration/33a83455-0a22-4221-82c3-bcc66f362a37-1504274541624"}
   this is the URL for other users to register your selected team
 - go to github.com, logout the current owner user, so that another user can login
 - browse the above generated team registration URL, then another GitHub OAuth flow starts,
@@ -197,17 +198,17 @@ For the `Get User Mapping` test, you may quety mapping by providing either topco
   this will create an owner user of your GitLab username
 - login into gitlab.com, create some test groups:
   click the upper right `+`, then click `New group`, fill in required fields to create group
-- use browser to browse `http://localhost:3000/api/v1/gitlab/owneruser/login`, GitLab OAuth will start,
+- use browser to browse `http://localhost:80/api/v1/gitlab/owneruser/login`, GitLab OAuth will start,
   then you should grant permissions to the app to call your GitLab API,
   if successful, success page is shown
 - after the owner user login, credential data are stored in session, you may use this browser session
   to do some owner user operations
-- browse `http://localhost:3000/api/v1/gitlab/owneruser/groups` to view current owner user's groups,
-  pagination is supported, e.g. browse `http://localhost:3000/api/v1/gitlab/owneruser/groups?page=1&perPage=10`
+- browse `http://localhost:80/api/v1/gitlab/owneruser/groups` to view current owner user's groups,
+  pagination is supported, e.g. browse `http://localhost:80/api/v1/gitlab/owneruser/groups?page=1&perPage=10`
 - during browsing groups, choose a group to allow user registration, extract its group id, which is used below
-- browse `http://localhost:3000/api/v1/gitlab/groups/{above-selected-group-id}/registrationurl`,
+- browse `http://localhost:80/api/v1/gitlab/groups/{above-selected-group-id}/registrationurl`,
   replacing {above-selected-group-id} with your selected group id, it will response with content like below:
-  {"url":"http://localhost:3000/api/v1/gitlab/groups/registration/13cf572b-bea3-4407-934c-2b8885d2dd56-1504956395852"}
+  {"url":"http://localhost:80/api/v1/gitlab/groups/registration/13cf572b-bea3-4407-934c-2b8885d2dd56-1504956395852"}
   this is the URL for other users to register your selected group
 - go to gitlab.com, logout the current owner user, so that another user can login
 - browse the above generated group registration URL, then another GitLab OAuth flow starts,
@@ -239,7 +240,6 @@ The app is mounted on `/app` so we can instruct express to always point to `inde
 
 ## App paths
 - `/app/login` > Login for the admin
-- `/app/tclogin` > TopCoder Login
 - `/app/users` > Allows admin to add a github user (add owners)
 - `/app/github-owner` > Shows the teams an owner is part of, if user isn't logged in to github he is redirected to oAuth flow
 - `/app/github-members/added` > Page shown after a user was successfully added to a team by using the team url
@@ -256,7 +256,7 @@ the `front/environments/environment.prod.ts` file will be used.
 When running `npm start` the frontend will automatically be built and a watcher for changes will be added (meanning the code will be rebuilt
 upon file changes).
 
-To access the application, after runnint `npm start` go to `http://localhost:3000/app` in your browser.
+To access the application, after runnint `npm start` go to `http://ragnarlocal.topcoder.com/` in your browser.
 
 To build the frontend for production, use the command:
 
@@ -271,9 +271,9 @@ For admin login use the credentials generated by the `npm run init-data` command
 ## Verification
 - `npm run init-data`
 - `npm start`
-- browse `http://localhost:3000/app`, login with credential `admin` / `password`
+- browse `http://localhost:80/app`, login with credential `admin` / `password`
 - add your github usernmae as owner, and add your gitlab username as owner
-- browse `http://localhost:3000/app`, login using github
+- browse `http://localhost:80/app`, login using github
 - after the github OAuth login flow, you will see your teams
 - click a team, then registration URL is generated and shown, the URL can be sent to other github users
   to register to the team, when accessing the URL by other github users,
@@ -281,7 +281,7 @@ For admin login use the credentials generated by the `npm run init-data` command
   and finally a success page is shown.
   Note that if you are testing using same browser, you need to logout the owner so that other users can login
   to register to the team.
-- browse `http://localhost:3000/app`, login using gitlab
+- browse `http://localhost:80/app`, login using gitlab
 - after the gitlab OAuth login flow, you will see your groups
 - click a group, then registration URL is generated and shown, the URL can be sent to other gitlab users
   to register to the group, when accessing the URL by other gitlab users,
@@ -294,9 +294,6 @@ For admin login use the credentials generated by the `npm run init-data` command
 
 ## TopCoder Login
 
-- when normal user accesses registration URL, s/he needs to do TopCoder login, so that we know which TopCoder member
+- when normal user accesses registration URL, they need to do TopCoder login, so that we know which TopCoder member
   requests the GitHub/GibLab access, the TopCoder user name and associated GitHub/GitLab user name are stored in
   database, there is a new API `/admin/tcuser` to get TopCoder/GitLab/GitHub user name mapping
-- For the Topcoder dev API, you may use credential `mess` / `appirio123` to login
-
-
