@@ -143,13 +143,14 @@ async function addTeamMember(teamId, ownerUserToken, normalUserToken) {
     const githubNormalUser = new GitHub({token: normalUserToken});
     const normalUser = await githubNormalUser.getUser().getProfile();
     const username = normalUser.data.login;
+    const id = normalUser.data.id;
 
     // add normal user to team
     const github = new GitHub({token: ownerUserToken});
     const team = github.getTeam(teamId);
     await team.addMembership(username);
     // return github username
-    return username;
+    return {username, id};
   } catch (err) {
     throw helper.convertGitHubError(err, 'Failed to add team member');
   }

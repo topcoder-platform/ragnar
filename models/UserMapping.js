@@ -9,6 +9,8 @@ const schema = new Schema({
   topcoderUsername: {type: String, required: true, unique: true},
   githubUsername: String,
   gitlabUsername: String,
+  githubUserId: Number,
+  gitlabUserId: Number
 });
 
 schema.index({topcoderUsername: 1});
