@@ -176,7 +176,7 @@ async function addGroupMember(groupId, ownerUserToken, normalUserToken) {
       .send(`user_id=${userId}&access_level=${constants.GITLAB_DEFAULT_GROUP_ACCESS_LEVEL}`)
       .end();
     // return gitlab username
-    return res.body.username;
+    return {username: res.body.username, id: res.body.id};
   } catch (err) {
     if (err instanceof errors.ApiError) {
       throw err;
