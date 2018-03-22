@@ -35,7 +35,7 @@ deploy_dev:
   script:
     - echo "Deploying the app"
     - apt-get update -qy
-    - apt-get install -y rubygems ruby2.3-dev
+    - apt-get install -y rubygems ruby-dev
     - gem install dpl
     - dpl --provider=heroku --app=$HEROKU_DEV_APP --api-key=$HEROKU_DEV_API_KEY
   only:
@@ -49,7 +49,7 @@ deploy_stage:
   script:
   - echo "Deploying the app"
   - apt-get update -qy
-  - apt-get install -y rubygems ruby2.3-dev
+  - apt-get install -y rubygems ruby-dev
   - gem install dpl
   - dpl --provider=heroku --app=$HEROKU_STAGING_APP --api-key=$HEROKU_STAGING_API_KEY
   only:
