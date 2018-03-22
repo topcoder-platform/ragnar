@@ -1,4 +1,5 @@
-image: node:latest
+image: starefossen/ruby-node:latest
+
 
 variables:
   PORT: 3000
