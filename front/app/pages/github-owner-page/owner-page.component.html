@@ -1,22 +1,31 @@
 <div class="container" *ngIf="state.ready">
   <h3>Your managed teams</h3>
-  <p><small>(Select a team to see the registration url )</small></p>
+  <p  *ngIf="state.teams.length">
+    <small>(Select a team to see the registration url )</small>
+  </p>
   <!-- show error message -->
   <p class="form-error">{{errorMsg}}</p>
-  <div class="list-group">
+  <div class="list-group" *ngIf="state.teams.length">
     <!-- list all teams and the register url -->
     <ng-container *ngFor="let t of state.teams; let $i=index">
       <a href="javascript:;" (click)="getSharableLink(t)" class="list-group-item list-group-item-action">{{$i+1}}. {{t.name}}</a>
       <div class="list-group-item disabled" *ngIf="state.team===t.id&&state.links[state.team]">
-        Team url for <strong>{{t.name}}</strong> is: <code>{{state.links[state.team]}}</code>
+        Team url for
+        <strong>{{t.name}}</strong> is:
+        <code>{{state.links[state.team]}}</code>
       </div>
     </ng-container>
   </div>
   <br/>
-  <div class="form-group">
+  <div class="form-group" *ngIf="state.teams.length">
     Page:
     <select class="form-control page" id="page" name="page" [(ngModel)]="state.page" (change)="changePage()">
       <option *ngFor="let p of getPages()">{{p}}</option>
     </select>
+  </div>
+  <div *ngIf="state.teams.length==0">
+    You don't appear to have any Github teams available to manage through Ragnar. Ragnar is used to give Topcoder members access
+    to specific teams using your ownership credentials. If you don't have any teams, Ragnar won't be able to manage access
+    for you. Please see this link for information on Github teams: <a href="https://help.github.com/articles/organizing-members-into-teams/" target="_blank">here</a>
   </div>
 </div>

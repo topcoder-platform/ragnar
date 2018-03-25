@@ -117,7 +117,7 @@ async function getGroupRegistrationUrl(req) {
 async function addUserToGroup(req, res) {
   const identifier = req.params.identifier;
   // validate the identifier
-  await helper.ensureExists(OwnerUserGroup, { identifier });
+  await helper.ensureExists(OwnerUserGroup, {identifier});
 
   // store identifier to session, to be compared in callback
   req.session.identifier = identifier;
@@ -148,10 +148,10 @@ async function addUserToGroupCallback(req, res) {
   if (!code) {
     throw new errors.ValidationError('Missing code.');
   }
-  const group = await helper.ensureExists(OwnerUserGroup, { identifier });
+  const group = await helper.ensureExists(OwnerUserGroup, {identifier});
   // get owner user
   const ownerUser = await helper.ensureExists(User,
-    { username: group.ownerUsername, type: constants.USER_TYPES.GITLAB, role: constants.USER_ROLES.OWNER });
+    {username: group.ownerUsername, type: constants.USER_TYPES.GITLAB, role: constants.USER_ROLES.OWNER});
 
   // refresh the owner user access token if needed
   if (ownerUser.accessTokenExpiration.getTime() <=
@@ -186,18 +186,17 @@ async function addUserToGroupCallback(req, res) {
     })
     .end();
   const token = result.body.access_token;
-  console.log(result.body);
   // add user to group
   const gitlabUser = await GitlabService.addGroupMember(group.groupId, ownerUser.accessToken, token);
   // associate gitlab username with TC username
   const topcoderUsername = req.session.tcUsername;
-  const mapping = await UserMapping.findOne({ topcoderUsername });
+  const mapping = await UserMapping.findOne({topcoderUsername});
   if (mapping) {
     mapping.gitlabUsername = gitlabUser.username;
     mapping.gitlabUserId = gitlabUser.id;
     await mapping.save();
   } else {
-    await UserMapping.create({ topcoderUsername, gitlabUsername: gitlabUser.username, gitlabUserId: gitlabUser.id });
+    await UserMapping.create({topcoderUsername, gitlabUsername: gitlabUser.username, gitlabUserId: gitlabUser.id});
   }
   // redirect to success page
   res.redirect(config.GITLAB_USER_ADDED_TO_GROUP_SUCCESS_URL);

@@ -10,7 +10,7 @@ const schema = new Schema({
   githubUsername: String,
   gitlabUsername: String,
   githubUserId: Number,
-  gitlabUserId: Number
+  gitlabUserId: Number,
 });
 
 schema.index({topcoderUsername: 1});

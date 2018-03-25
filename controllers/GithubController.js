@@ -140,7 +140,6 @@ async function addUserToTeamCallback(req, res) {
     .set('Accept', 'application/json')
     .end();
   const token = result.body.access_token;
-  console.log(result.body);
   // add user to team
   const githubUser = await GithubService.addTeamMember(team.teamId, team.ownerToken, token);
   // associate github username with TC username

@@ -29,22 +29,25 @@ const MS_PER_SECOND = 1000;
  * @returns {Promise} the promise result of found owner user
  */
 async function ensureOwnerUser(token) {
-  let username;
+  let userProfile;
   try {
     // get current user name
-    username = await request
+    userProfile = await request
       .get(`${config.GITLAB_API_BASE_URL}/user`)
       .set('Authorization', `Bearer ${token}`)
       .end()
-      .then((res) => res.body.username);
+      .then((res) => res.body);
   } catch (err) {
     throw helper.convertGitLabError(err, 'Failed to ensure valid owner user.');
   }
-  if (!username) {
-    throw new errors.UnauthorizedError('Can not get username from the access token.');
+  if (!userProfile) {
+    throw new errors.UnauthorizedError('Can not get user from the access token.');
   }
-  return await helper.ensureExists(User,
-    {username, type: constants.USER_TYPES.GITLAB, role: constants.USER_ROLES.OWNER});
+  const user = await helper.ensureExists(User,
+    {userProviderId: userProfile.id, type: constants.USER_TYPES.GITLAB, role: constants.USER_ROLES.OWNER});
+  user.userProviderId = userProfile.id;
+  user.username = userProfile.username;
+  return await user.save();
 }
 
 ensureOwnerUser.schema = Joi.object().keys({
@@ -191,11 +194,37 @@ addGroupMember.schema = Joi.object().keys({
   normalUserToken: Joi.string().required(),
 });
 
+/**
+ * Gets the user id by username
+ * @param {string} username the username
+ * @returns {number} the user id
+ */
+async function getUserIdByUsername(username) {
+  try {
+    // get current user
+    const users = await request
+      .get(`${config.GITLAB_API_BASE_URL}/users?username=${username}`)
+      .end()
+      .then((res) => res.body);
+    if (!users || !users.length) {
+      throw new errors.NotFoundError(`The user with username ${username} is not found on gitlab`);
+    }
+    return users[0].id;
+  } catch (err) {
+    throw helper.convertGitLabError(err, 'Failed to ensure valid owner user.');
+  }
+}
+
+getUserIdByUsername.schema = Joi.object().keys({
+  username: Joi.string().required(),
+});
+
 module.exports = {
   ensureOwnerUser,
   listOwnerUserGroups,
   getGroupRegistrationUrl,
   addGroupMember,
+  getUserIdByUsername,
 };
 
 helper.buildService(module.exports);

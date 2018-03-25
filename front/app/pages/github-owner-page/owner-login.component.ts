@@ -1,3 +1,4 @@
+
 import { Http, Response } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -42,7 +43,7 @@ export class GithubOwnerLoginComponent implements OnInit {
         const res = err.json();
         // If no user/owner found, show error
         if(res && res.code === 'NOT_FOUND') {
-          this.state = {...(this.state), authErr: `User isn't an owner!`};
+          this.router.navigate(['not-owner/github']);
         } else {
           this.state = {...(this.state), authErr: err};
         }

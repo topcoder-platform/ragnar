@@ -2,7 +2,7 @@
 export const environment = {
   production: true,
   api: {
-    base: 'undefined',
+    base: 'undefined/api/v1',
     admin: '/admin/login',
     tcLogin: '/tclogin',
     users: '/admin/users',
