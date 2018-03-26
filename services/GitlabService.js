@@ -44,7 +44,7 @@ async function ensureOwnerUser(token) {
     throw new errors.UnauthorizedError('Can not get user from the access token.');
   }
   const user = await helper.ensureExists(User,
-    {userProviderId: userProfile.id, type: constants.USER_TYPES.GITLAB, role: constants.USER_ROLES.OWNER});
+    { userProviderId: userProfile.id, type: constants.USER_TYPES.GITLAB, role: constants.USER_ROLES.OWNER });
   user.userProviderId = userProfile.id;
   user.username = userProfile.username;
   return await user.save();
@@ -64,7 +64,7 @@ ensureOwnerUser.schema = Joi.object().keys({
  */
 async function listOwnerUserGroups(username, page = 1, perPage = constants.GITLAB_DEFAULT_PER_PAGE) {
   const ownerUser = await helper.ensureExists(User,
-    {username, type: constants.USER_TYPES.GITLAB, role: constants.USER_ROLES.OWNER});
+    { username, type: constants.USER_TYPES.GITLAB, role: constants.USER_ROLES.OWNER });
 
   // refresh the owner user access token if needed
   if (ownerUser.accessTokenExpiration.getTime() <=
@@ -90,7 +90,7 @@ async function listOwnerUserGroups(username, page = 1, perPage = constants.GITLA
   try {
     const response = await request
       .get(`${config.GITLAB_API_BASE_URL}/groups`)
-      .query({page, per_page: perPage, owned: true})
+      .query({ page, per_page: perPage, owned: true })
       .set('Authorization', `Bearer ${ownerUser.accessToken}`)
       .end();
 
@@ -145,7 +145,7 @@ async function getGroupRegistrationUrl(ownerUsername, groupId) {
 
   // construct URL
   const url = `${config.WEBSITE}/api/${config.API_VERSION}/gitlab/groups/registration/${identifier}`;
-  return {url};
+  return { url };
 }
 
 getGroupRegistrationUrl.schema = Joi.object().keys({
@@ -179,7 +179,7 @@ async function addGroupMember(groupId, ownerUserToken, normalUserToken) {
       .send(`user_id=${userId}&access_level=${constants.GITLAB_DEFAULT_GROUP_ACCESS_LEVEL}`)
       .end();
     // return gitlab username
-    return {username: res.body.username, id: res.body.id};
+    return { username: res.body.username, id: res.body.id };
   } catch (err) {
     if (err instanceof errors.ApiError) {
       throw err;
@@ -211,7 +211,8 @@ async function getUserIdByUsername(username) {
     }
     return users[0].id;
   } catch (err) {
-    throw helper.convertGitLabError(err, 'Failed to ensure valid owner user.');
+    
+    throw helper.convertGitLabError(err, 'Failed to get detail about user from gitlab.');
   }
 }
 

@@ -175,11 +175,11 @@ async function getUserIdByUsername(username) {
     const github = new GitHub();
     const user = await github.getUser(username).getProfile();
     if (!user || !user.data) {
-      throw new errors.NotFoundError(`The user with username ${username} is not found on github.`);
+      throw new Error(`The user with username ${username} is not found on github`);
     }
     return user.data.id;
   } catch (err) {
-    throw helper.convertGitHubError(err, 'Failed to get detail about user');
+    throw helper.convertGitHubError(err, 'Failed to get detail about user from github');
   }
 }
 

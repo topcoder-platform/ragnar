@@ -12,8 +12,9 @@ export class UsersPageComponent {
   public user: any = {};
   public userAdded = false;
   public msg: string = null;
+  public error = false;
 
-  constructor(public http: AuthHttp) {}
+  constructor(public http: AuthHttp) { }
 
   /**
    * addUser Add owner to db
@@ -23,10 +24,12 @@ export class UsersPageComponent {
   addUser(username: string, type: string) {
     this.clear();
     if (!username || username.length === 0) {
+      this.error = true;
       this.msg = 'Missing user name.';
       return;
     }
     if (!type || type.length === 0) {
+      this.error = true;
       this.msg = 'Missing user type.';
       return;
     }
@@ -38,6 +41,11 @@ export class UsersPageComponent {
     }).subscribe((res) => {
       this.userAdded = true;
       this.user = {};
+    }, (err) => {
+      const e = err.json();
+      this.error = true;
+      console.log(e );
+      this.msg = e.message;
     });
   }
 
@@ -47,5 +55,6 @@ export class UsersPageComponent {
   clear() {
     this.userAdded = false;
     this.msg = null;
+    this.error = false;
   }
 }
