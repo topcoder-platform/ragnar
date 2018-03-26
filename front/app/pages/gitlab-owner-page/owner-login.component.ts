@@ -44,7 +44,7 @@ export class GitlabOwnerLoginComponent implements OnInit {
         const res = err.json();
         // If no user/owner found, show error
         if(res && res.code === 'NOT_FOUND') {
-          this.state = {...(this.state), authErr: `User isn't an owner!`};
+          this.router.navigate(['not-owner/gitlab']);
         } else {
           this.state = {...(this.state), authErr: err};
         }

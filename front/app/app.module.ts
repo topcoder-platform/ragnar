@@ -19,6 +19,7 @@ import { GithubMemberAddedPageComponent } from './pages/github-members/member-ad
 import { GitlabOwnerPageComponent } from './pages/gitlab-owner-page/owner-page.component';
 import { GitlabOwnerLoginComponent } from './pages/gitlab-owner-page/owner-login.component';
 import { GitlabMemberAddedPageComponent } from './pages/gitlab-members/member-added-page.component';
+import { NotOwnerPageComponent } from './pages/not-owner-page/not-owner-page.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { GitlabMemberAddedPageComponent } from './pages/gitlab-members/member-ad
     GitlabOwnerPageComponent,
     GitlabOwnerLoginComponent,
     GitlabMemberAddedPageComponent,
+    NotOwnerPageComponent,
   ],
   imports: [
     BrowserModule,

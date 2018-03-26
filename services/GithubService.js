@@ -24,16 +24,19 @@ const errors = require('../common/errors');
  * @returns {Promise} the promise result of found owner user
  */
 async function ensureOwnerUser(token) {
-  let username;
+  let userProfile;
   try {
     const github = new GitHub({token});
     const user = await github.getUser().getProfile();
-    username = user.data.login;
+    userProfile = user.data;
   } catch (err) {
     throw helper.convertGitHubError(err, 'Failed to ensure valid owner user.');
   }
-  return await helper.ensureExists(User,
-    {username, type: constants.USER_TYPES.GITHUB, role: constants.USER_ROLES.OWNER});
+  const user = await helper.ensureExists(User,
+    {userProviderId: userProfile.id, type: constants.USER_TYPES.GITHUB, role: constants.USER_ROLES.OWNER});
+  user.userProviderId = userProfile.id;
+  user.username = userProfile.login;
+  return await user.save();
 }
 
 ensureOwnerUser.schema = Joi.object().keys({
@@ -162,11 +165,34 @@ addTeamMember.schema = Joi.object().keys({
   normalUserToken: Joi.string().required(),
 });
 
+/**
+ * Gets the user id by username
+ * @param {string} username the username
+ * @returns {number} the user id
+ */
+async function getUserIdByUsername(username) {
+  try {
+    const github = new GitHub();
+    const user = await github.getUser(username).getProfile();
+    if (!user || !user.data) {
+      throw new Error(`The user with username ${username} is not found on github`);
+    }
+    return user.data.id;
+  } catch (err) {
+    throw helper.convertGitHubError(err, 'Failed to get detail about user from github');
+  }
+}
+
+getUserIdByUsername.schema = Joi.object().keys({
+  username: Joi.string().required(),
+});
+
 module.exports = {
   ensureOwnerUser,
   listOwnerUserTeams,
   getTeamRegistrationUrl,
   addTeamMember,
+  getUserIdByUsername,
 };
 
 helper.buildService(module.exports);

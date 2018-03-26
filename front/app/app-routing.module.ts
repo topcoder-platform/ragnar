@@ -11,6 +11,7 @@ import { GithubMemberAddedPageComponent } from './pages/github-members/member-ad
 import { GitlabOwnerPageComponent } from './pages/gitlab-owner-page/owner-page.component';
 import { GitlabOwnerLoginComponent } from './pages/gitlab-owner-page/owner-login.component';
 import { GitlabMemberAddedPageComponent } from './pages/gitlab-members/member-added-page.component';
+import { NotOwnerPageComponent } from './pages/not-owner-page/not-owner-page.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'gitlab-owner-login', component: GitlabOwnerLoginComponent },
   { path: 'gitlab-owner', component: GitlabOwnerPageComponent },
   { path: 'gitlab-members/added', component: GitlabMemberAddedPageComponent },
+  { path: 'not-owner/:provider', component: NotOwnerPageComponent },
   { path: '**', redirectTo: '/login' } // Page not found, redirect to login
 ];
 

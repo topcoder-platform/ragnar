@@ -1,7 +1,7 @@
 <div class="container" *ngIf="state.ready">
   <h3>Your managed groups</h3>
-  <p><small>(Select a group to see the registration url )</small></p>
-  <div class="list-group">
+  <p *ngIf="state.groups.length"><small>(Select a group to see the registration url )</small></p>
+  <div class="list-group" *ngIf="state.groups.length">
     <!-- list all groups and the register url -->
     <ng-container *ngFor="let g of state.groups; let $i=index">
       <a href="javascript:;" (click)="getSharableLink(g)" class="list-group-item list-group-item-action">{{$i+1}}. {{g.name}}</a>
@@ -11,10 +11,15 @@
     </ng-container>
   </div>
   <br/>
-  <div class="form-group">
+  <div class="form-group" *ngIf="state.groups.length">
     Page:
     <select class="form-control page" id="page" name="page" [(ngModel)]="state.page" (change)="changePage()">
       <option *ngFor="let p of getPages()">{{p}}</option>
     </select>
+  </div>
+  <div *ngIf="state.groups.length==0">
+    You don't appear to have any Gitlab groups available to manage through Ragnar. Ragnar is used to give Topcoder members access
+    to specific group using your ownership credentials. If you don't have any group, Ragnar won't be able to manage access
+    for you. Please see this link for information on Gitlab group: <a href="https://docs.gitlab.com/ee/user/group/" target="_blank">here</a>
   </div>
 </div>

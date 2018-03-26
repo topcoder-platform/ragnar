@@ -13,7 +13,7 @@
     "scripts": {
         "postinstall": "node set-prod-env.js && npm run build:fe:prod",
         "start": "./node_modules/.bin/concurrently \"npm run start:be\" \"npm run start:fe\"",
-        "start:be": "node app.js",
+        "start:be": "nodemon app.js",
         "start:fe": "ng build --watch",
         "build:fe:prod": "ng build -prod",
         "test": "node ./node_modules/mocha/bin/mocha --recursive --timeout 999999 --colors tests/*.test.js --bail",

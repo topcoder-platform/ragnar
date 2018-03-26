@@ -4,13 +4,13 @@
     <!-- Add owner notification message -->
     <div class="form-success">{{userAdded? 'User added!' : '&nbsp;'}}</div>
     <!-- error message -->
-    <div class="form-error">{{msg}}</div>
+    <div class="form-error" *ngIf='error'>{{msg}}</div>
     <!-- Add owner form -->
     <div class="form-group">
       Username:
-      <input type="text" class="form-control" id="usernameInput" placeholder="Username" name="username" [(ngModel)]="user.username" (keydown)="clear()">
-      <br/>
-      Type:
+      <input type="text" class="form-control" id="usernameInput" placeholder="Username" name="username" [(ngModel)]="user.username"
+        (keydown)="clear()">
+      <br/> Type:
       <select class="form-control" id="userTypeInput" name="type" [(ngModel)]="user.type" value="github">
         <option>github</option>
         <option>gitlab</option>
