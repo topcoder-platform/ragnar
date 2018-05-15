@@ -18,11 +18,17 @@ export class UsersPageComponent {
 
   /**
    * addUser Add owner to db
+   * @param {string} topcoderUsername the topcoder handle of user
    * @param {string} username The username to be added
    * @param {string} type The user type
    */
-  addUser(username: string, type: string) {
+  addUser(topcoderUsername: string, username: string, type: string) {
     this.clear();
+    if (!username || username.length === 0) {
+      this.error = true;
+      this.msg = 'Missing user topcoder handle.';
+      return;
+    }
     if (!username || username.length === 0) {
       this.error = true;
       this.msg = 'Missing user name.';
@@ -35,6 +41,7 @@ export class UsersPageComponent {
     }
 
     this.http.post(apiUrl('users'), {
+      topcoderUsername,
       username,
       "role": "owner",
       type,

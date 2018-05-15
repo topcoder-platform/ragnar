@@ -37,7 +37,7 @@ async function ownerUserLogin(req, res) {
   }&redirect_uri=${
     encodeURIComponent(callbackUri)
   }&scope=${
-    encodeURIComponent('admin:org')
+    encodeURIComponent('admin:org admin:repo_hook repo')
   }&state=${req.session.state}`);
 }
 

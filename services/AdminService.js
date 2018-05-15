@@ -25,14 +25,14 @@ const gitlabService = require('./GitlabService');
  * @returns {Promise} the promise result containing token to access other admin APIs
  */
 async function login(body) {
-  const admin = await helper.ensureExists(Admin, { username: body.username });
+  const admin = await helper.ensureExists(Admin, {username: body.username});
   const isMatch = await helper.validateHash(body.password, admin.password);
   if (!isMatch) {
     throw new errors.UnauthorizedError('Login failed.', 'Password is wrong.');
   }
   // generate JWT token
-  const token = jwt.sign({ username: body.username }, config.JWT_SECRET, { expiresIn: config.JWT_EXPIRATION });
-  return { username: body.username, token };
+  const token = jwt.sign({username: body.username}, config.JWT_SECRET, {expiresIn: config.JWT_EXPIRATION});
+  return {username: body.username, token};
 }
 
 login.schema = Joi.object().keys({
@@ -49,21 +49,32 @@ login.schema = Joi.object().keys({
  */
 async function saveUser(body) {
   let userId;
+  const topcoderUsername = body.topcoderUsername.toLowerCase();
   if (body.type === constants.USER_TYPES.GITHUB) {
     userId = await gitHubService.getUserIdByUsername(body.username);
   } else {
     userId = await gitlabService.getUserIdByUsername(body.username);
   }
-  const user = await User.findOne({ userProviderId: userId, type: body.type });
-  if (!user) {
-    return await User.create({ ...body, userProviderId: userId });
+  // ensure no two user's are assigned same topcoder handle for same provider
+  let user = await User.findOne({topcoderUsername, type: body.type});
+  if (user && user.userProviderId !== userId) {
+    throw new errors.ValidationError(`The topcoder handle '${body.topcoderUsername}' is already mapped to username '${user.username}' for ${body.type}.`);
   }
-  _.assign(user, { ...body, userProviderId: userId });
+  // if check user with service provider already exits
+  if (!user) {
+    user = await User.findOne({userProviderId: userId, type: body.type});
+  }
+  body.topcoderUsername = topcoderUsername;
+  if (!user) {
+    return await User.create({...body, userProviderId: userId});
+  }
+  _.assign(user, {...body, userProviderId: userId});
   return await user.save();
 }
 
 saveUser.schema = Joi.object().keys({
   body: Joi.object().keys({
+    topcoderUsername: Joi.string().required(),
     username: Joi.string().required(),
     role: Joi.string().valid(_.values(constants.USER_ROLES)).required(),
     type: Joi.string().valid(_.values(constants.USER_TYPES)).required(),

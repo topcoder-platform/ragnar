@@ -96,21 +96,22 @@ describe('Test Admin Functionalities', () => {
 
   it('save user, missing authorization token, 401 error expected', async() => {
     await api.post('/api/v1/admin/users')
-      .send({username: 'someuser', role: constants.USER_ROLES.OWNER, type: constants.USER_TYPES.GITHUB})
+      .send({topcoderUsername: 'tonyj', username: 'someuser', role: constants.USER_ROLES.OWNER, type: constants.USER_TYPES.GITHUB})
       .expect(401);
   });
 
   it('save user, wrong token, 401 error expected', async() => {
     await api.post('/api/v1/admin/users').set('Authorization', 'Bearer wrong')
-      .send({username: 'someuser', role: constants.USER_ROLES.OWNER, type: constants.USER_TYPES.GITHUB})
+      .send({topcoderUsername: 'tonyj', username: 'someuser', role: constants.USER_ROLES.OWNER, type: constants.USER_TYPES.GITHUB})
       .expect(401);
   });
 
   it('save github user successfully', async() => {
     // create user
     let response = await api.post('/api/v1/admin/users').set('Authorization', `Bearer ${adminToken}`)
-      .send({username: 'someuser', role: constants.USER_ROLES.OWNER, type: constants.USER_TYPES.GITHUB})
+      .send({topcoderUsername: 'tonyj', username: 'someuser', role: constants.USER_ROLES.OWNER, type: constants.USER_TYPES.GITHUB})
       .expect(200);
+    response.body.should.have.property('topcoderUsername', 'tonyj');
     response.body.should.have.property('username', 'someuser');
     response.body.should.have.property('role', constants.USER_ROLES.OWNER);
     response.body.should.have.property('type', constants.USER_TYPES.GITHUB);
@@ -119,8 +120,9 @@ describe('Test Admin Functionalities', () => {
 
     // save same user, user is updated, id is not changed
     response = await api.post('/api/v1/admin/users').set('Authorization', `Bearer ${adminToken}`)
-      .send({username: 'someuser', role: constants.USER_ROLES.OWNER, type: constants.USER_TYPES.GITHUB})
+      .send({topcoderUsername: 'tonyj', username: 'someuser', role: constants.USER_ROLES.OWNER, type: constants.USER_TYPES.GITHUB})
       .expect(200);
+    response.body.should.have.property('topcoderUsername', 'tonyj');
     response.body.should.have.property('username', 'someuser');
     response.body.should.have.property('role', constants.USER_ROLES.OWNER);
     response.body.should.have.property('type', constants.USER_TYPES.GITHUB);
@@ -130,8 +132,9 @@ describe('Test Admin Functionalities', () => {
   it('save gitlab user successfully', async() => {
     // create user
     let response = await api.post('/api/v1/admin/users').set('Authorization', `Bearer ${adminToken}`)
-      .send({username: 'someuser', role: constants.USER_ROLES.OWNER, type: constants.USER_TYPES.GITLAB})
+      .send({topcoderUsername: 'tonyj', username: 'someuser', role: constants.USER_ROLES.OWNER, type: constants.USER_TYPES.GITLAB})
       .expect(200);
+    response.body.should.have.property('topcoderUsername', 'tonyj');
     response.body.should.have.property('username', 'someuser');
     response.body.should.have.property('role', constants.USER_ROLES.OWNER);
     response.body.should.have.property('type', constants.USER_TYPES.GITLAB);
@@ -140,8 +143,9 @@ describe('Test Admin Functionalities', () => {
 
     // save same user, user is updated, id is not changed
     response = await api.post('/api/v1/admin/users').set('Authorization', `Bearer ${adminToken}`)
-      .send({username: 'someuser', role: constants.USER_ROLES.OWNER, type: constants.USER_TYPES.GITLAB})
+      .send({topcoderUsername: 'tonyj', username: 'someuser', role: constants.USER_ROLES.OWNER, type: constants.USER_TYPES.GITLAB})
       .expect(200);
+    response.body.should.have.property('topcoderUsername', 'tonyj');
     response.body.should.have.property('username', 'someuser');
     response.body.should.have.property('role', constants.USER_ROLES.OWNER);
     response.body.should.have.property('type', constants.USER_TYPES.GITLAB);

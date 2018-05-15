@@ -21,7 +21,7 @@ export const environment = {
   }
 };
 `;
-
+/* eslint-disable no-console */
 writeFile(targetPath, envConfigFile, (err) => {
   if (err) {
     console.log('Error during environment variable generation');
@@ -30,3 +30,4 @@ writeFile(targetPath, envConfigFile, (err) => {
     console.log('Environment file for production generated successfully');
   }
 });
+/* eslint-disable no-console */
