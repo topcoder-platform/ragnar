@@ -82,7 +82,7 @@ function _decorateWithValidators(service) {
     const params = getParams(method);
     service[name] = async function serviceMethodWithValidation(...args) {
       const value = _combineObject(params, args);
-      const normalized = Joi.attempt(value, method.schema, { abortEarly: false });
+      const normalized = Joi.attempt(value, method.schema, {abortEarly: false});
       // Joi will normalize values
       // for example string number '1' to 1
       // if schema type is number
@@ -127,10 +127,10 @@ function buildController(controller) {
  * @returns {Error} converted error
  */
 function convertGitHubError(err, message) {
-  const resMsg = `${message}. ${err.message}.`;
+  let resMsg = `${message}. ${err.message}.`;
   const detail = _.get(err, 'response.body.message');
   if (detail) {
-    resMsg += ` Detail: ${detail}`
+    resMsg += ` Detail: ${detail}`;
   }
   const apiError = new errors.ApiError(
     _.get(err, 'response.status', constants.SERVICE_ERROR_STATUS),
@@ -147,10 +147,10 @@ function convertGitHubError(err, message) {
  * @returns {Error} converted error
  */
 function convertGitLabError(err, message) {
-  const resMsg = `${message}. ${err.message}.`;
+  let resMsg = `${message}. ${err.message}.`;
   const detail = _.get(err, 'response.body.message');
   if (detail) {
-    resMsg += ` Detail: ${detail}`
+    resMsg += ` Detail: ${detail}`;
   }
   const apiError = new errors.ApiError(
     err.status || _.get(err, 'response.status', constants.SERVICE_ERROR_STATUS),

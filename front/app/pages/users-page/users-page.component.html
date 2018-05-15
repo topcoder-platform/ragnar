@@ -1,5 +1,5 @@
 <div class="container d-flex align-items-center">
-  <form class="users-form" (ngSubmit)="addUser(user.username, user.type)">
+  <form class="users-form" (ngSubmit)="addUser(user.topcoderUsername, user.username, user.type)">
     <h3>Add owner</h3>
     <!-- Add owner notification message -->
     <div class="form-success">{{userAdded? 'User added!' : '&nbsp;'}}</div>
@@ -7,7 +7,10 @@
     <div class="form-error" *ngIf='error'>{{msg}}</div>
     <!-- Add owner form -->
     <div class="form-group">
-      Username:
+      Topcoder Handle
+      <input type="text" class="form-control" id="handleInput" placeholder="Topcoder Handle" name="handle" [(ngModel)]="user.topcoderUsername"
+      (keydown)="clear()">
+      <br/> Username:
       <input type="text" class="form-control" id="usernameInput" placeholder="Username" name="username" [(ngModel)]="user.username"
         (keydown)="clear()">
       <br/> Type:

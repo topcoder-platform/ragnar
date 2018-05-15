@@ -128,7 +128,7 @@ async function addUserToGroup(req, res) {
     config.GITLAB_CLIENT_ID
     }&redirect_uri=${
     encodeURIComponent(callbackUri)
-    }&response_type=code&state=${identifier}&scope=read_user`);
+    }&response_type=code&state=${identifier}&scope=read_user api`);
 }
 
 /**

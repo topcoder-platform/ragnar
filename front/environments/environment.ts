@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   api: {
-    base: 'http://ragnar.topcoder-dev.com/api/v1',
+    base: 'http://ragnarlocal.topcoder.com/api/v1',
     admin: '/admin/login',
     tcLogin: '/tclogin',
     users: '/admin/users',

@@ -36,6 +36,8 @@ async function ensureOwnerUser(token) {
     {userProviderId: userProfile.id, type: constants.USER_TYPES.GITHUB, role: constants.USER_ROLES.OWNER});
   user.userProviderId = userProfile.id;
   user.username = userProfile.login;
+  // save user token data
+  user.accessToken = token;
   return await user.save();
 }
 
