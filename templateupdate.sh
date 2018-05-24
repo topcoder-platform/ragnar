@@ -46,17 +46,12 @@ DATABASE_URL=postgres://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_DATABASE;
 
 # following can have in config file
 
-KAFKA_GROUP_ID=$(eval "echo \$${ENV}_KAFKA_GROUP_ID")
-EMAIL_FROM=$(eval "echo \$${ENV}_EMAIL_FROM")
 LOG_LEVEL=$(eval "echo \$${ENV}_LOG_LEVEL")
 NODE_ENV=$(eval "echo \$${ENV}_NODE_ENV")
 PORT=$(eval "echo \$${ENV}_NODE_PORT")
 JWKS_URI=$(eval "echo \$${ENV}_JWKSURI")
 TEMPLATE_MAP=$(eval "echo \$${ENV}_TEMPLATE_MAP")
 echo $TEMPLATE_MAP 
-EMAIL_MAX_ERRORS=$(eval "echo \$${ENV}_EMAIL_MAX_ERRORS")
-EMAIL_PAUSE_TIME=$(eval "echo \$${ENV}_EMAIL_PAUSE_TIME")
-EMAIL_RETRY_SCHEDULE=$(eval "echo \"\$${ENV}_EMAIL_RETRY_SCHEDULE\"")
 DISABLE_LOGGING=$(eval "echo \$${ENV}_DISABLE_LOGGING")
 
 API_CONTEXT_PATH=$(eval "echo \$${ENV}_API_CONTEXT_PATH")
