@@ -1,0 +1,112 @@
+{
+   "family": "%s",
+   "requiresCompatibilities": ["EC2", "FARGATE"],
+   "networkMode": "awsvpc",
+   "executionRoleArn": "arn:aws:iam::%s:role/ecsTaskExecutionRole",
+   "cpu": "1024",
+   "memory": "2048",
+   "containerDefinitions": [{
+      "name": "%s",
+      "memory": 1000,
+      "cpu" : 0,
+      "image": "%s.dkr.ecr.%s.amazonaws.com/%s:%s",
+      "environment": [
+        {
+          "name" : "ENV",
+          "value" : "%s"
+        },
+        {
+          "name": "authDomain",
+          "value": "%s"
+        },
+        {
+          "name": "authSecret",
+          "value": "%s"
+        },
+        {
+          "name": "DATABASE_URL",
+          "value": "%s"
+        },
+        {
+          "name": "EMAIL_FROM",
+          "value": "%s"
+        },
+        {
+          "name": "jwksUri",
+          "value": "%s"
+        },
+        {
+          "name": "KAFKA_CLIENT_CERT",
+          "value": "%s"
+        },
+        {
+          "name": "KAFKA_CLIENT_CERT_KEY",
+          "value": "%s"
+        },
+        {
+          "name": "KAFKA_GROUP_ID",
+          "value": "%s"
+        },
+        {
+          "name": "KAFKA_URL",
+          "value": "%s"
+        },
+        {
+          "name": "LOG_LEVEL",
+          "value": "%s"
+        },
+        {
+          "name": "PORT",
+          "value": "%s"
+        },
+        {
+          "name": "SENDGRID_API_KEY",
+          "value": "%s"
+        },
+        {
+          "name": "TEMPLATE_MAP",
+          "value": "%s"
+        },
+        {
+          "name": "validIssuers",
+          "value": "%s"
+        },
+        {
+          "name": "EMAIL_MAX_ERRORS",
+          "value": "%s"
+        },
+        {
+          "name": "EMAIL_PAUSE_TIME",
+          "value": "%s"
+        },
+        {
+          "name": "EMAIL_RETRY_SCHEDULE",
+          "value": "%s"
+        },
+        {
+          "name": "DISABLE_LOGGING",
+          "value": "%s"
+        },
+        {
+          "name": "API_CONTEXT_PATH",
+          "value": "%s"
+        }
+      ],
+      "portMappings": [
+        {
+          "hostPort": %s,
+          "protocol": "tcp",
+          "containerPort": %s
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/aws/ecs/%s",
+          "awslogs-region": "%s",
+          "awslogs-stream-prefix": "%s"
+        }
+      }
+    }
+  ]
+}
