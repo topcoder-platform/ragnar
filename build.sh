@@ -51,7 +51,7 @@ JWKSURI=$(eval "echo \$${ENV}_JWKSURI")
 TEMPLATE_MAP=$(eval "echo \$${ENV}_TEMPLATE_MAP")
 
 
-TAG=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/ragnar-service:$CIRCLE_SHA1
+TAG=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/ragnar:$CIRCLE_SHA1
 
 docker build -t $TAG .
 
