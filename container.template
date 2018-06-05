@@ -7,7 +7,7 @@
    "memory": "1024",
    "containerDefinitions": [{
       "name": "%s",
-      "memory": 1000,
+      "memory": 300,
       "cpu" : 0,
       "image": "%s.dkr.ecr.%s.amazonaws.com/%s:%s",
       "environment": [
