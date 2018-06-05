@@ -1,6 +1,6 @@
 {
    "family": "%s",
-   "requiresCompatibilities": ["EC2", "FARGATE"],
+   "requiresCompatibilities": ["EC2"],
    "networkMode": "awsvpc",
    "executionRoleArn": "arn:aws:iam::%s:role/ecsTaskExecutionRole",
    "cpu": "128",
