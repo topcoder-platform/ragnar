@@ -1,7 +1,6 @@
 {
    "family": "%s",
    "requiresCompatibilities": ["EC2"],
-   "networkMode": "awsvpc",
    "executionRoleArn": "arn:aws:iam::%s:role/ecsTaskExecutionRole",
    "containerDefinitions": [{
       "name": "%s",
