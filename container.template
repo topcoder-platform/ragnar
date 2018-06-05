@@ -3,8 +3,8 @@
    "requiresCompatibilities": ["EC2", "FARGATE"],
    "networkMode": "awsvpc",
    "executionRoleArn": "arn:aws:iam::%s:role/ecsTaskExecutionRole",
-   "cpu": "512",
-   "memory": "1024",
+   "cpu": "128",
+   "memory": "300",
    "containerDefinitions": [{
       "name": "%s",
       "memory": 300,
